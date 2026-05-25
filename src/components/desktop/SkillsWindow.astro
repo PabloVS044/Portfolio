@@ -1,0 +1,205 @@
+---
+import '../../styles/SkillsWindow.css';
+
+const skills = [
+	{
+		id: 'react',
+		name: 'React',
+		category: 'Frontend',
+		pid: '3000',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+		description: 'Utilizado como mi librería principal para construir interfaces de usuario dinámicas e interactivas. Tengo experiencia manejando estado global con Context API/Zustand, construyendo hooks personalizados y optimizando el rendimiento de componentes complejos.'
+	},
+	{
+		id: 'javascript',
+		name: 'JavaScript',
+		category: 'Programming',
+		pid: '3080',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+		description: 'Mi lenguaje principal. Amplio dominio de ES6+, programación asíncrona (Promises, async/await), manipulación del DOM y closures. Lo utilizo tanto en frontend como en el backend.'
+	},
+	{
+		id: 'nodejs',
+		name: 'Node.js',
+		category: 'Backend',
+		pid: '8080',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+		description: 'Creación de APIs RESTful robustas y eficientes usando Express.js. Experiencia en el manejo de autenticación (JWT), middleware, conexión a bases de datos y despliegue de servicios.'
+	},
+	{
+		id: 'python',
+		name: 'Python',
+		category: 'Programming',
+		pid: '8000',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+		description: 'Utilizado para scripting, automatización de tareas y desarrollo de backend. Experiencia integrando soluciones con IA, manejo de datos y construcción de APIs rápidas con frameworks como FastAPI.'
+	},
+	{
+		id: 'docker',
+		name: 'Docker',
+		category: 'DevOps',
+		pid: '4521',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+		description: 'Implementado para crear entornos de desarrollo consistentes. Experiencia escribiendo Dockerfiles, gestionando contenedores con Docker Compose y preparando aplicaciones para su despliegue.'
+	},
+	{
+		id: 'astro',
+		name: 'Astro',
+		category: 'Frontend',
+		pid: '4321',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg',
+		description: 'Mi framework favorito para sitios web estáticos y orientados a contenido (como este portafolio). Excelente manejo de Astro Islands para hidratación parcial y rendimiento ultra rápido.'
+	},
+	{
+		id: 'typescript',
+		name: 'TypeScript',
+		category: 'Programming',
+		pid: '3001',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+		description: 'Lo aplico para añadir tipado estático a mis proyectos de JavaScript. Reduce errores en tiempo de ejecución, mejora el autocompletado y facilita la escalabilidad y mantenimiento del código.'
+	},
+	{
+		id: 'figma',
+		name: 'Figma',
+		category: 'Design',
+		pid: '1024',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg',
+		description: 'Lo utilizo para diseñar wireframes, prototipos interactivos y crear sistemas de diseño antes de escribir código. Fundamental para planificar la experiencia de usuario (UX/UI).'
+	},
+	{
+		id: 'aws',
+		name: 'AWS',
+		category: 'Cloud',
+		pid: '9001',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+		description: 'Conocimientos en servicios básicos en la nube para hospedar y escalar aplicaciones. Manejo de instancias EC2, almacenamiento en S3 y despliegues serverless.'
+	},
+	{
+		id: 'git',
+		name: 'Git',
+		category: 'Tooling',
+		pid: '1337',
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+		description: 'Uso diario para control de versiones. Dominio de branching, merging, resolución de conflictos y colaboración a través de plataformas como GitHub o GitLab.'
+	}
+];
+---
+
+<article
+	class="desktop-window skills-window-bg"
+	data-skills-window
+	data-min-width="600"
+	data-min-height="400"
+	aria-labelledby="skills-window-title"
+	hidden
+>
+	<header class="skills-header" data-skills-drag>
+		<div class="files-window__traffic-lights">
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--close" data-skills-close aria-label="Close"><span></span></button>
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--minimize" data-skills-minimize aria-label="Minimize"><span></span></button>
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--maximize" data-skills-maximize aria-label="Maximize"><span></span></button>
+		</div>
+		<div class="skills-title" id="skills-window-title">
+			<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+			</svg>
+			<span>Activity Monitor</span>
+		</div>
+	</header>
+
+	<div class="skills-layout">
+		<div class="skills-list-container">
+			<table class="skills-table">
+				<thead>
+					<tr>
+						<th>Process Name</th>
+						<th>Category</th>
+						<th>User</th>
+						<th>PID</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody id="skills-tbody">
+					{skills.map((skill) => (
+						<tr class="skills-row" data-skill-id={skill.id}>
+							<td>
+								<div class="skill-name">
+									<img src={skill.icon} alt="" class="skill-icon" loading="lazy" decoding="async" />
+									{skill.name}
+								</div>
+							</td>
+							<td>{skill.category}</td>
+							<td>pablo</td>
+							<td>{skill.pid}</td>
+							<td>
+								<div class="skill-status">
+									<span class="status-dot"></span>
+									Running
+								</div>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		
+		<aside class="skills-detail-pane">
+			<div class="skill-empty-state" id="skill-empty-state">
+				Select a process to view details
+			</div>
+			
+			<div class="skill-detail-content" id="skill-detail-content" style="display: none;">
+				<div class="skill-detail-header">
+					<img src="" alt="" class="skill-detail-icon" id="detail-icon" />
+					<div>
+						<h2 class="skill-detail-title" id="detail-title">Skill Name</h2>
+						<span class="skill-detail-category" id="detail-category">Category</span>
+					</div>
+				</div>
+				<div class="skill-detail-body">
+					<strong>Implementación:</strong>
+					<p id="detail-description">Description goes here...</p>
+				</div>
+			</div>
+		</aside>
+	</div>
+</article>
+
+<script is:inline define:vars={{ skillsData: skills }}>
+	// This script runs on the client to handle row clicks
+	document.addEventListener('DOMContentLoaded', () => {
+		const rows = document.querySelectorAll('.skills-row');
+		const emptyState = document.getElementById('skill-empty-state');
+		const detailContent = document.getElementById('skill-detail-content');
+		
+		const detailIcon = document.getElementById('detail-icon');
+		const detailTitle = document.getElementById('detail-title');
+		const detailCategory = document.getElementById('detail-category');
+		const detailDescription = document.getElementById('detail-description');
+
+		rows.forEach(row => {
+			row.addEventListener('click', () => {
+				// Remove active class from all rows
+				rows.forEach(r => r.classList.remove('active'));
+				// Add active class to clicked row
+				row.classList.add('active');
+
+				// Find the skill data
+				const skillId = row.getAttribute('data-skill-id');
+				const skill = skillsData.find(s => s.id === skillId);
+
+				if (skill) {
+					// Update DOM
+					detailIcon.src = skill.icon;
+					detailTitle.textContent = skill.name;
+					detailCategory.textContent = skill.category;
+					detailDescription.textContent = skill.description;
+
+					// Switch views
+					emptyState.style.display = 'none';
+					detailContent.style.display = 'flex';
+				}
+			});
+		});
+	});
+</script>

@@ -666,7 +666,23 @@ export const initDesktop = () => {
 		defaultWidth: 600,
 		defaultHeight: 500,
 		defaultXRatio: 0.25,
+		defaultXRatio: 0.25,
 		defaultYOffset: 50,
+		openMode: 'dblclick',
+	});
+	initManagedWindow({
+		windowSelector: '[data-skills-window]',
+		shortcutSelector: '[data-skills-shortcut]',
+		closeSelector: '[data-skills-close]',
+		minimizeSelector: '[data-skills-minimize]',
+		maximizeSelector: '[data-skills-maximize]',
+		dragHandleSelector: '[data-skills-drag]',
+		minWidth: 500,
+		minHeight: 400,
+		defaultWidth: 800,
+		defaultHeight: 550,
+		defaultXRatio: 0.2,
+		defaultYOffset: 40,
 		openMode: 'dblclick',
 	});
 	initDesktopKeyboard();

@@ -1,0 +1,207 @@
+.skills-window-bg {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+	overflow: hidden;
+	backdrop-filter: blur(30px) saturate(1.5);
+	-webkit-backdrop-filter: blur(30px) saturate(1.5);
+	background: rgba(30, 30, 32, 0.85);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	color: #ececec;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.skills-window-bg[hidden] {
+	display: none !important;
+}
+
+.skills-header {
+	display: flex;
+	align-items: center;
+	padding: 14px 16px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	cursor: grab;
+	background: rgba(0, 0, 0, 0.2);
+	flex-shrink: 0;
+	position: relative;
+}
+
+.skills-header:active {
+	cursor: grabbing;
+}
+
+.skills-title {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 13px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.8);
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.skills-layout {
+	display: flex;
+	flex: 1;
+	overflow: hidden;
+}
+
+.skills-list-container {
+	flex: 1;
+	overflow-y: auto;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.skills-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.skills-table th {
+	text-align: left;
+	padding: 8px 16px;
+	color: rgba(255, 255, 255, 0.5);
+	font-weight: 500;
+	position: sticky;
+	top: 0;
+	background: rgba(30, 30, 32, 0.95);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	z-index: 1;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.skills-row {
+	cursor: pointer;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+	transition: background 0.1s;
+}
+
+.skills-row:nth-child(even) {
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.skills-row:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.skills-row.active {
+	background: #0066cc;
+	color: white;
+}
+
+.skills-row td {
+	padding: 8px 16px;
+	white-space: nowrap;
+}
+
+.skill-name {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 500;
+}
+
+.skill-icon {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+}
+
+.skill-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.status-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #34c759;
+	box-shadow: 0 0 5px rgba(52, 199, 89, 0.5);
+}
+
+.skills-detail-pane {
+	width: 320px;
+	background: rgba(0, 0, 0, 0.2);
+	padding: 24px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.skill-empty-state {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.4);
+	text-align: center;
+	font-size: 14px;
+	padding: 20px;
+}
+
+.skill-detail-content {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(5px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.skill-detail-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 12px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-detail-icon {
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+.skill-detail-title {
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0;
+	letter-spacing: -0.5px;
+}
+
+.skill-detail-category {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.1);
+	padding: 4px 10px;
+	border-radius: 20px;
+}
+
+.skill-detail-body {
+	font-size: 14px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.skill-detail-body strong {
+	color: #fff;
+}
