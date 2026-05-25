@@ -1,0 +1,22 @@
+<!--  -->---
+import FaultyTerminalReact from './react/FaultyTerminal.jsx';
+
+const props = Astro.props;
+---
+
+<div class="faulty-terminal-layer">
+	<FaultyTerminalReact client:load {...props} />
+</div>
+
+<style is:global>
+	.faulty-terminal-layer {
+		width: 100%;
+		height: 100%;
+	}
+
+	.faulty-terminal-layer > astro-island {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+</style>

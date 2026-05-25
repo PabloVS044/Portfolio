@@ -1,0 +1,28 @@
+---
+import "../../styles/desktop.css";
+import DesktopBottomUI from "./DesktopBottomUI.astro";
+import DesktopMenubar from "./DesktopMenubar.astro";
+import DesktopShortcuts from "./DesktopShortcuts.astro";
+import ObsidianWindow from "./ObsidianWindow.astro";
+import VscodeProjectsWindow from "./VscodeProjectsWindow.astro";
+import CvWindow from "./CvWindow.astro";
+import TerminalWindow from "./TerminalWindow.astro";
+import MusicWindow from "./MusicWindow.astro";
+---
+
+<main class="desktop-stage">
+	<DesktopMenubar />
+	<DesktopShortcuts />
+	<ObsidianWindow />
+	<VscodeProjectsWindow />
+	<CvWindow />
+	<TerminalWindow />
+	<MusicWindow />
+	<DesktopBottomUI />
+</main>
+
+<script>
+	import { initDesktop } from "../../scripts/desktop.js";
+
+	initDesktop();
+</script>

@@ -1,0 +1,96 @@
+---
+import '../../styles/MusicWindow.css';
+
+const songs = [
+	{ title: 'Self aware', artist: 'Tamper City', cover: '/player/self-aware.jpg' },
+	{ title: 'Mutt', artist: 'Leon Thomas', cover: '/player/mutt.jpg' },
+	{ title: 'From Time', artist: 'Drake', cover: '/player/from-time.png' },
+	{ title: 'Chicago', artist: 'Michael Jackson', cover: '/player/chicago.jpg' },
+	{ title: 'Hvn on earth', artist: 'Lil Tecca', cover: '/player/hvn-on-earth.jpg' },
+	{ title: 'Instant crush', artist: 'Daft Punk', cover: '/player/instant-crush.jpg' },
+	{ title: 'The color violet', artist: 'Tory Lanez', cover: '/player/the-color-violet.jpg' },
+	{ title: 'Disenchanted', artist: 'My Chemical Romance', cover: '/player/disenchanted.png' },
+	{ title: 'Circles', artist: 'Pierce the Veil', cover: '/player/circles.jpg' },
+	{ title: 'Me Quieres Mal', artist: 'Jesse Baez', cover: '/player/me-quieres-mal.jpg' },
+	{ title: 'En el Suelo', artist: 'Kidd Voodoo', cover: '/player/en-el-suelo.jpg' },
+];
+---
+
+<article
+	class="desktop-window apple-music-window"
+	data-music-window
+	data-min-width="400"
+	data-min-height="500"
+	aria-labelledby="music-window-title"
+	aria-hidden="true"
+	hidden
+>
+	<!-- Borde luminoso de resplandor -->
+	<div class="window-glow" aria-hidden="true"></div>
+
+	<!-- Efectos de cristal -->
+	<div class="glass-background" aria-hidden="true"></div>
+	<div class="glass-noise" aria-hidden="true"></div>
+	<div class="glass-sheen" aria-hidden="true"></div>
+
+	<!-- Resize handles -->
+	<div class="resize-handle resize-handle--n" data-resize-handle="n"></div>
+	<div class="resize-handle resize-handle--e" data-resize-handle="e"></div>
+	<div class="resize-handle resize-handle--s" data-resize-handle="s"></div>
+	<div class="resize-handle resize-handle--w" data-resize-handle="w"></div>
+	<div class="resize-handle resize-handle--nw" data-resize-handle="nw"></div>
+	<div class="resize-handle resize-handle--ne" data-resize-handle="ne"></div>
+	<div class="resize-handle resize-handle--se" data-resize-handle="se"></div>
+	<div class="resize-handle resize-handle--sw" data-resize-handle="sw"></div>
+
+	<header class="apple-music-header" data-music-drag>
+		<div class="files-window__traffic-lights">
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--close" data-music-close aria-label="Close"><span></span></button>
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--minimize" data-music-minimize aria-label="Minimize"><span></span></button>
+			<button type="button" class="files-window__traffic-light files-window__traffic-light--maximize" data-music-maximize aria-label="Maximize"><span></span></button>
+		</div>
+		<div class="apple-music-title" id="music-window-title">
+			<span class="apple-music-title-icon">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M9 18V5l12-2v13"></path>
+					<circle cx="6" cy="18" r="3"></circle>
+					<circle cx="18" cy="16" r="3"></circle>
+				</svg>
+			</span>
+			<span class="obsidian-app__title-text">Apple Music</span>
+		</div>
+	</header>
+
+	<div class="window-content apple-music-content">
+		<div class="music-playlist-header">
+			<img src="/player/portada.jpg" alt="Playlist Cover" class="playlist-cover-large" />
+			<div class="playlist-info">
+				<span class="playlist-type">PLAYLIST</span>
+				<h1 class="playlist-title">Daily Soundtrack</h1>
+				<p class="playlist-description">Una muy pequeña selección de canciones que conforman el soundtrack de mi día a día, ya sea programando, diseñando o haciendo otras cosas.</p>
+				<p class="playlist-meta">Pablo Vásquez • 11 canciones</p>
+			</div>
+		</div>
+
+		<div class="music-tracks-container">
+			<div class="tracks-header">
+				<div class="track-col-hash">#</div>
+				<div class="track-col-title">TÍTULO</div>
+			</div>
+			<div class="tracks-list">
+				{songs.map((song, index) => (
+					<div class="track-row">
+						<div class="track-col-hash">{index + 1}</div>
+						<div class="track-col-title">
+							<img src={song.cover} alt={song.title} class="track-small-cover" />
+							<div class="track-name-artist">
+								<span class="track-name">{song.title}</span>
+								<span class="track-artist">{song.artist}</span>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+</article>

@@ -1,0 +1,448 @@
+---
+const tabs = [
+	{ id: 'readme', label: 'README.md' },
+	{ id: 'preview', label: 'Preview' },
+	{ id: 'learnings', label: 'Learnings.md' },
+];
+
+const projects = [
+	{
+		id: 'waterway',
+		crumb: 'waterway',
+		fileName: 'Waterway+',
+		title: 'WaterWay+',
+		subtitle: 'Plataforma web para monitoreo y protección de ríos',
+		description:
+			'Plataforma web colaborativa para la protección de ríos, reportes ciudadanos y eventos ambientales impulsada por datos satelitales y IA.',
+		year: '2025',
+		role: 'Full Stack Developer',
+		status: 'Primer Lugar',
+		statusTone: 'complete',
+		stack: ['React', 'Node.js', 'Express', 'MongoDB', 'OpenAI', 'Copernicus'],
+		links: [
+			{ label: 'Repositorio', href: '#' },
+		],
+		overview:
+			'Proyecto ganador del primer lugar en la Hackatón Copernicus 2025 organizada por SENACYT. Permite el monitoreo ambiental combinando datos satelitales con análisis de inteligencia artificial.',
+		features: [
+			{
+				title: 'Datos Satelitales',
+				description: 'Integración en tiempo real de datos del programa espacial Copernicus.',
+			},
+			{
+				title: 'Análisis con IA',
+				description: 'Uso de la API de OpenAI para procesar reportes y analizar eventos ambientales de forma inteligente.',
+			},
+			{
+				title: 'Reportes Ciudadanos',
+				description: 'Módulo colaborativo para que la comunidad registre anomalías y participe en la protección de los ríos.',
+			},
+		],
+		previewHighlights: [
+			'Participación integral: desde la planificación y diseño de producto hasta el desarrollo full-stack.',
+			'Arquitectura escalable en el backend usando Node.js, Express y MongoDB.',
+			'Interfaces de mapas interactivos que cruzan datos satelitales con reportes en el terreno.',
+		],
+		learnings: [
+			'Cruzar datos geoespaciales con IA requiere una optimización cuidadosa para mantener el rendimiento.',
+			'El diseño de producto en una hackatón debe priorizar la narrativa visual y la facilidad de uso inmediato.',
+			'Las arquitecturas basadas en eventos facilitan la escalabilidad del procesamiento en tiempo real.',
+		],
+		metrics: [
+			{ label: 'Premio', value: '1er Lugar', meta: 'SENACYT 2025' },
+			{ label: 'Datos', value: 'Copernicus', meta: 'Satelital' },
+		],
+		accent: '#5b7cff',
+		accentSoft: 'rgba(91, 124, 255, 0.2)',
+		glow: 'rgba(91, 124, 255, 0.32)',
+	},
+	{
+		id: 'chemiq',
+		crumb: 'chemiq',
+		fileName: 'ChemiQ',
+		title: 'ChemiQ',
+		subtitle: 'Portal web para la Asociación de Química UVG',
+		description:
+			'Plataforma integral que centraliza noticias, pódcast, recursos académicos y contenido para estudiantes de química.',
+		year: '2024 - 2025',
+		role: 'Backend & Database Engineer',
+		status: 'En Producción',
+		statusTone: 'progress',
+		stack: ['React', 'Node.js', 'PostgreSQL', 'Express', 'Supabase', 'Knex'],
+		links: [
+			{ label: 'Visitar Portal', href: '#' },
+		],
+		overview:
+			'Un portal web diseñado para fortalecer la comunicación y presencia digital de la asociación. Proveé una base mantenible para la gestión de contenido académico y multimedia.',
+		features: [
+			{
+				title: 'Gestión de Contenido',
+				description: 'Sistema centralizado para publicación de noticias, pódcast y material académico.',
+			},
+			{
+				title: 'Base de Datos Relacional',
+				description: 'Estructura sólida en PostgreSQL gestionada mediante Supabase y Knex.js.',
+			},
+			{
+				title: 'API Escalable',
+				description: 'Servicios backend desarrollados en Express y Node.js para alimentar la plataforma en tiempo real.',
+			},
+		],
+		previewHighlights: [
+			'Arquitectura backend orientada a la mantenibilidad a largo plazo por futuros estudiantes.',
+			'Manejo robusto de migraciones de bases de datos y consultas relacionales complejas.',
+			'Integración fluida de multimedia y streaming de pódcast.',
+		],
+		learnings: [
+			'Supabase combinado con Knex permite iteraciones de base de datos extremadamente rápidas sin perder el control del esquema.',
+			'Para proyectos comunitarios/estudiantiles, la facilidad de mantenimiento es la característica más importante.',
+			'Separar estrictamente la capa de acceso a datos facilita el testing y la seguridad de los endpoints.',
+		],
+		metrics: [
+			{ label: 'Base de Datos', value: 'PostgreSQL', meta: 'Supabase' },
+			{ label: 'Usuarios', value: 'UVG', meta: 'Estudiantes' },
+		],
+		accent: '#4ee3c8',
+		accentSoft: 'rgba(78, 227, 200, 0.18)',
+		glow: 'rgba(78, 227, 200, 0.28)',
+	},
+	{
+		id: 'seasos',
+		crumb: 'seasos',
+		fileName: 'SeaSOS',
+		title: 'SeaSOS',
+		subtitle: 'Plataforma educativa sobre ecosistemas marinos',
+		description:
+			'Aplicación web que utiliza IA y visualización de datos para generar conciencia sobre el impacto humano en los océanos.',
+		year: '2024',
+		role: 'Full Stack Developer',
+		status: 'Completado',
+		statusTone: 'complete',
+		stack: ['React', 'Node.js', 'MongoDB', 'Express', 'OpenAI'],
+		links: [
+			{ label: 'Repositorio', href: '#' },
+		],
+		overview:
+			'Una herramienta educativa de alto impacto que combina el consumo de APIs de IA generativa con gráficos interactivos para explicar fenómenos complejos del ecosistema marino.',
+		features: [
+			{
+				title: 'Generación con IA',
+				description: 'Integración de la API de OpenAI para crear contenido educativo dinámico y personalizado según las interacciones del usuario.',
+			},
+			{
+				title: 'Visualización de Datos',
+				description: 'Gráficos e infografías interactivas para comunicar el impacto humano a lo largo del tiempo.',
+			},
+			{
+				title: 'Módulo de Conciencia',
+				description: 'Recorridos interactivos para aumentar la retención del conocimiento en los usuarios.',
+			},
+		],
+		previewHighlights: [
+			'Consumo asíncrono y estructurado de la API de OpenAI para garantizar respuestas rápidas y seguras.',
+			'UI reactiva y amigable orientada a la exploración y el aprendizaje autodidacta.',
+			'Backend en Express optimizado para la entrega de datos estadísticos hacia el cliente.',
+		],
+		learnings: [
+			'Hacer que los datos crudos sean emocionalmente resonantes requiere interactividad, no solo gráficas planas.',
+			'El prompting estructurado es vital para que las respuestas del LLM encajen en componentes de UI predecibles.',
+			'Los tiempos de carga en plataformas educativas determinan fuertemente el engagement del usuario.',
+		],
+		metrics: [
+			{ label: 'IA Engine', value: 'OpenAI', meta: 'GPT-4' },
+			{ label: 'Propósito', value: 'Educativo', meta: 'Conciencia' },
+		],
+		accent: '#a66bff',
+		accentSoft: 'rgba(166, 107, 255, 0.18)',
+		glow: 'rgba(166, 107, 255, 0.28)',
+	},
+];
+---
+
+<section
+	id="desktop-code-window"
+	class="desktop-window desktop-window--code"
+	data-code-window
+	aria-hidden="true"
+	hidden
+>
+	<div class="code-window" role="dialog" aria-labelledby="code-window-title" aria-modal="false">
+		<h2 id="code-window-title" class="desktop-sr-only">VS Code projects showcase</h2>
+
+		<header class="code-window__header" data-code-drag-handle>
+			<div class="code-window__framebar">
+				<div class="code-window__traffic-lights files-window__traffic-lights">
+					<button type="button" class="files-window__traffic-light files-window__traffic-light--close" data-close-code aria-label="Close"><span></span></button>
+					<button type="button" class="files-window__traffic-light files-window__traffic-light--minimize" data-minimize-code aria-label="Minimize"><span></span></button>
+					<button type="button" class="files-window__traffic-light files-window__traffic-light--maximize" data-toggle-code-maximize aria-label="Maximize"><span></span></button>
+				</div>
+
+				<div class="code-window__breadcrumbs">
+					<span class="code-window__crumb-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24">
+							<path d="M4.8 10.2 12 4.8l7.2 5.4v8.6H14v-4.6h-4v4.6H4.8z"></path>
+						</svg>
+					</span>
+					<span class="code-window__crumb">Projects</span>
+					<span class="code-window__crumb-separator" aria-hidden="true">
+						<svg viewBox="0 0 24 24">
+							<path d="m9 6.5 6 5.5-6 5.5"></path>
+						</svg>
+					</span>
+					<span class="code-window__crumb code-window__crumb--current" data-code-current-project-label>{projects[0].crumb}</span>
+				</div>
+
+				<div class="code-window__tabs" aria-label="Project sections">
+					{tabs.map((tab, index) => (
+						<button
+							type="button"
+							class={`code-window__tab ${index === 0 ? 'code-window__tab--active' : ''}`}
+							data-code-tab={tab.id}
+							aria-selected={index === 0 ? 'true' : 'false'}
+						>
+							{tab.label}
+						</button>
+					))}
+					<button type="button" class="code-window__tab-action" aria-label="New tab">
+						+
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<div class="code-window__shell">
+			<aside class="code-window__explorer" aria-label="Projects list">
+				<div class="code-window__explorer-heading">FILES</div>
+				<nav class="code-window__project-list">
+					{projects.map((project, index) => (
+						<button
+							type="button"
+							class={`code-window__project-item ${index === 0 ? 'code-window__project-item--active' : ''}`}
+							data-code-project={project.id}
+							data-code-project-label={project.crumb}
+							aria-selected={index === 0 ? 'true' : 'false'}
+						>
+							<span class="code-window__project-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="3.8" y="4.2" width="16.4" height="15.6" rx="2.6"></rect>
+									<path d="M8 9.2h3.2M8 14.4h8M14.2 9.2H16"></path>
+								</svg>
+							</span>
+							<span class="code-window__project-name">{project.fileName}</span>
+						</button>
+					))}
+				</nav>
+			</aside>
+
+			<section class="code-window__main" aria-label="Project showcase">
+				{projects.map((project, projectIndex) => (
+					<>
+						<article
+							class="code-window__panel"
+							data-code-project-panel={project.id}
+							data-code-tab-panel="readme"
+							style={`--code-accent: ${project.accent}; --code-accent-soft: ${project.accentSoft}; --code-glow: ${project.glow};`}
+							hidden={projectIndex !== 0}
+						>
+							<div class="code-window__hero">
+								<div class="code-window__hero-mark">
+									<div class="code-window__hero-mark-inner"></div>
+								</div>
+								<div class="code-window__hero-copy">
+									<p class="code-window__eyebrow">{project.fileName}</p>
+									<h3>{project.title}</h3>
+									<p class="code-window__subtitle">{project.subtitle}</p>
+									<p class="code-window__description">{project.description}</p>
+
+									<div class="code-window__actions">
+										{project.links.map((link, linkIndex) => (
+											<a href={link.href} class={`code-window__action ${linkIndex === 0 ? 'code-window__action--primary' : ''}`}>
+												{link.label}
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+
+							<div class="code-window__preview-frame">
+								<div class="code-window__preview-sidebar">
+									<span class="code-window__preview-badge"></span>
+									<span class="code-window__preview-line code-window__preview-line--active"></span>
+									<span class="code-window__preview-line"></span>
+									<span class="code-window__preview-line"></span>
+									<span class="code-window__preview-line"></span>
+								</div>
+								<div class="code-window__preview-canvas">
+									<div class="code-window__preview-search"></div>
+									<div class="code-window__preview-map">
+										<span class="code-window__preview-node code-window__preview-node--a"></span>
+										<span class="code-window__preview-node code-window__preview-node--b"></span>
+										<span class="code-window__preview-node code-window__preview-node--c"></span>
+										<span class="code-window__preview-node code-window__preview-node--d"></span>
+										<span class="code-window__preview-node code-window__preview-node--e"></span>
+									</div>
+								</div>
+								<div class="code-window__preview-metrics">
+									{project.metrics.map((metric) => (
+										<div class="code-window__metric-card">
+											<span class="code-window__metric-label">{metric.label}</span>
+											<strong>{metric.value}</strong>
+											<span class="code-window__metric-meta">{metric.meta}</span>
+										</div>
+									))}
+								</div>
+							</div>
+
+							<div class="code-window__content-block">
+								<h4>Overview</h4>
+								<p>{project.overview}</p>
+							</div>
+
+							<div class="code-window__feature-grid">
+								{project.features.map((feature) => (
+									<div class="code-window__feature-card">
+										<h5>{feature.title}</h5>
+										<p>{feature.description}</p>
+									</div>
+								))}
+							</div>
+						</article>
+
+						<article
+							class="code-window__panel"
+							data-code-project-panel={project.id}
+							data-code-tab-panel="preview"
+							style={`--code-accent: ${project.accent}; --code-accent-soft: ${project.accentSoft}; --code-glow: ${project.glow};`}
+							hidden
+						>
+							<div class="code-window__section-header">
+								<p class="code-window__eyebrow">Preview</p>
+								<h3>{project.title} Workspace Preview</h3>
+								<p class="code-window__description">
+									A project-level summary of the interface direction, system behavior and the user flow this
+									showcase emphasizes.
+								</p>
+							</div>
+
+							<div class="code-window__preview-layout">
+								<div class="code-window__preview-board">
+									<div class="code-window__preview-board-top">
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+									<div class="code-window__preview-board-main">
+										<div class="code-window__preview-board-column"></div>
+										<div class="code-window__preview-board-canvas"></div>
+										<div class="code-window__preview-board-stack">
+											<span></span>
+											<span></span>
+											<span></span>
+										</div>
+									</div>
+								</div>
+
+								<div class="code-window__note-list">
+									{project.previewHighlights.map((item) => (
+										<div class="code-window__note-card">
+											<p>{item}</p>
+										</div>
+									))}
+								</div>
+							</div>
+						</article>
+
+						<article
+							class="code-window__panel"
+							data-code-project-panel={project.id}
+							data-code-tab-panel="learnings"
+							style={`--code-accent: ${project.accent}; --code-accent-soft: ${project.accentSoft}; --code-glow: ${project.glow};`}
+							hidden
+						>
+							<div class="code-window__section-header">
+								<p class="code-window__eyebrow">Learnings</p>
+								<h3>What this project taught me</h3>
+								<p class="code-window__description">
+									The most useful takeaways from building {project.title}, focused on product decisions,
+									interface design and engineering tradeoffs.
+								</p>
+							</div>
+
+							<div class="code-window__learning-grid">
+								{project.learnings.map((learning, index) => (
+									<div class="code-window__learning-card">
+										<span class="code-window__learning-index">0{index + 1}</span>
+										<p>{learning}</p>
+									</div>
+								))}
+							</div>
+						</article>
+					</>
+				))}
+			</section>
+
+			<aside class="code-window__details" aria-label="Project details">
+				{projects.map((project, index) => (
+					<div
+						class="code-window__details-panel"
+						data-code-project-info={project.id}
+						style={`--code-accent: ${project.accent};`}
+						hidden={index !== 0}
+					>
+						<h4>DETAILS</h4>
+
+						<div class="code-window__detail-group">
+							<span class="code-window__detail-label">Year</span>
+							<strong>{project.year}</strong>
+						</div>
+
+						<div class="code-window__detail-group">
+							<span class="code-window__detail-label">Role</span>
+							<strong>{project.role}</strong>
+						</div>
+
+						<div class="code-window__detail-group">
+							<span class="code-window__detail-label">Status</span>
+							<strong class={`code-window__status code-window__status--${project.statusTone}`}>
+								<i></i>
+								{project.status}
+							</strong>
+						</div>
+
+						<div class="code-window__detail-group">
+							<span class="code-window__detail-label">Stack</span>
+							<ul class="code-window__stack-list">
+								{project.stack.map((item) => <li>{item}</li>)}
+							</ul>
+						</div>
+
+						<div class="code-window__detail-group">
+							<span class="code-window__detail-label">Links</span>
+							<div class="code-window__link-list">
+								{project.links.map((link) => (
+									<a href={link.href} class="code-window__detail-link">
+										{link.label}
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="M14 5h5v5"></path>
+											<path d="M10 14 19 5"></path>
+											<path d="M19 13v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"></path>
+										</svg>
+									</a>
+								))}
+							</div>
+						</div>
+					</div>
+				))}
+			</aside>
+		</div>
+	</div>
+
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--n" data-resize-handle="n" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--e" data-resize-handle="e" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--s" data-resize-handle="s" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--w" data-resize-handle="w" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--ne" data-resize-handle="ne" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--nw" data-resize-handle="nw" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--se" data-resize-handle="se" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--sw" data-resize-handle="sw" aria-hidden="true"></div>
+</section>

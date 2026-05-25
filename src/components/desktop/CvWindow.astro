@@ -1,0 +1,210 @@
+<section
+	id="desktop-cv-window"
+	class="desktop-window desktop-window--cv"
+	data-cv-window
+	aria-hidden="true"
+	hidden
+>
+	<div class="cv-window" role="dialog" aria-labelledby="cv-window-title" aria-modal="false">
+		<header class="cv-window__header" data-cv-drag-handle>
+			<div class="cv-window__titlebar">
+				<div class="cv-window__traffic-lights files-window__traffic-lights">
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--close"
+						data-close-cv
+						aria-label="Close"
+					>
+						<span></span>
+					</button>
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--minimize"
+						data-minimize-cv
+						aria-label="Minimize"
+					>
+						<span></span>
+					</button>
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--maximize"
+						data-toggle-cv-maximize
+						aria-label="Maximize"
+					>
+						<span></span>
+					</button>
+				</div>
+
+				<div class="cv-window__window-title">
+					<h2 id="cv-window-title">Mi CV</h2>
+				</div>
+
+				<div class="cv-window__header-actions">
+					<a href="/cv.pdf" download="Mi_CV.pdf" class="cv-window__tool-button" aria-label="Descargar CV" title="Descargar">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+							<polyline points="7 10 12 15 17 10"></polyline>
+							<line x1="12" y1="15" x2="12" y2="3"></line>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<div class="cv-window__body">
+			<iframe 
+				src="/cv.pdf" 
+				title="CV PDF Viewer"
+			></iframe>
+		</div>
+	</div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--n" data-resize-handle="n" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--e" data-resize-handle="e" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--s" data-resize-handle="s" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--w" data-resize-handle="w" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--ne" data-resize-handle="ne" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--nw" data-resize-handle="nw" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--se" data-resize-handle="se" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--sw" data-resize-handle="sw" aria-hidden="true"></div>
+</section>
+
+<style>
+	.cv-window {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		border-radius: 1.28rem;
+		overflow: hidden;
+		background: #323639; /* Solid dark background typical for PDF viewers */
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow:
+			0 1.8rem 4rem rgba(0, 0, 0, 0.42),
+			0 0.25rem 0.8rem rgba(0, 0, 0, 0.16),
+			inset 0 1px 0 rgba(255, 255, 255, 0.06);
+		opacity: 0;
+		transform: translateY(1rem) scale(0.984);
+		transform-origin: left top;
+		transition:
+			opacity 220ms ease,
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: auto;
+	}
+
+	/* Use global selector for states controlled by JS */
+	:global(.desktop-window[data-open='true']) .cv-window {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	:global(.desktop-window[data-maximized='true']) .cv-window {
+		border-radius: 1rem;
+	}
+
+	.cv-window__header {
+		display: flex;
+		flex-direction: column;
+		padding: 0.82rem 0.96rem;
+		background:
+			linear-gradient(180deg, rgba(45, 50, 57, 0.98), rgba(30, 35, 41, 0.92));
+		border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+		font-family:
+			'SF Pro Text',
+			'SF Pro Display',
+			-apple-system,
+			BlinkMacSystemFont,
+			'Helvetica Neue',
+			sans-serif;
+		touch-action: none;
+		flex-shrink: 0;
+	}
+
+	.cv-window__titlebar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.8rem;
+	}
+
+	.cv-window__traffic-lights {
+		width: 4.4rem;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		gap: 0.34rem;
+	}
+
+	.cv-window__window-title {
+		flex: 1;
+		text-align: center;
+		min-width: 0;
+	}
+
+	.cv-window__window-title h2 {
+		margin: 0;
+		font-size: 0.94rem;
+		font-weight: 650;
+		letter-spacing: -0.02em;
+		color: rgba(244, 246, 249, 0.94);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.cv-window__header-actions {
+		display: flex;
+		justify-content: flex-end;
+		width: 4.4rem; /* Match traffic lights width to keep title perfectly centered */
+		flex-shrink: 0;
+	}
+
+	.cv-window__tool-button {
+		appearance: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: transparent;
+		width: 1.92rem;
+		height: 1.92rem;
+		border-radius: 0.6rem;
+		color: rgba(221, 225, 232, 0.82);
+		cursor: pointer;
+		transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+	}
+
+	.cv-window__tool-button:hover {
+		background: rgba(255, 255, 255, 0.08);
+		color: rgba(246, 248, 251, 0.98);
+	}
+
+	.cv-window__tool-button:active {
+		transform: scale(0.96);
+	}
+
+	.cv-window__tool-button svg {
+		width: 0.98rem;
+		height: 0.98rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.7;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.cv-window__body {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		background: #525659;
+		position: relative;
+	}
+
+	.cv-window__body iframe {
+		border: none;
+		width: 100%;
+		height: 100%;
+		display: block;
+		flex: 1;
+	}
+</style>

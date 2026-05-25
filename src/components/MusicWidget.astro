@@ -1,0 +1,7 @@
+---
+import MusicWidgetReact from './react/MusicWidget.jsx';
+
+const props = Astro.props;
+---
+
+<MusicWidgetReact client:only="react" {...props} />

@@ -1,0 +1,205 @@
+<section
+	id="desktop-files-window"
+	class="desktop-window desktop-window--files"
+	data-files-window
+	aria-hidden="true"
+	hidden
+>
+	<div class="files-window" role="dialog" aria-labelledby="files-window-title" aria-modal="false">
+		<header class="files-window__header" data-files-drag-handle>
+			<div class="files-window__titlebar">
+				<div class="files-window__traffic-lights">
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--close"
+						data-close-files
+						aria-label="Close"
+					>
+						<span></span>
+					</button>
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--minimize"
+						data-minimize-files
+						aria-label="Minimize"
+					>
+						<span></span>
+					</button>
+					<button
+						type="button"
+						class="files-window__traffic-light files-window__traffic-light--maximize"
+						data-toggle-files-maximize
+						aria-label="Maximize"
+					>
+						<span></span>
+					</button>
+				</div>
+
+				<div class="files-window__window-title">
+					<h2 id="files-window-title">Experiencia</h2>
+				</div>
+
+				<div class="files-window__header-actions">
+					<button type="button" class="files-window__tool-button" aria-label="Share">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M12 16.8V5.9"></path>
+							<path d="m7.7 10.2 4.3-4.3 4.3 4.3"></path>
+							<path d="M6.2 18.1h11.6"></path>
+						</svg>
+					</button>
+					<button type="button" class="files-window__tool-button" aria-label="More options">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<circle cx="6" cy="12" r="1.5" fill="currentColor" stroke="none"></circle>
+							<circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"></circle>
+							<circle cx="18" cy="12" r="1.5" fill="currentColor" stroke="none"></circle>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<div class="files-window__toolbar">
+				<div class="files-window__nav">
+					<button type="button" class="files-window__tool-button" aria-label="Back">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="m14.8 6.8-5.6 5.2 5.6 5.2"></path>
+						</svg>
+					</button>
+					<button type="button" class="files-window__tool-button" aria-label="Forward">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="m9.2 6.8 5.6 5.2-5.6 5.2"></path>
+						</svg>
+					</button>
+				</div>
+
+				<div class="files-window__path">
+					<span class="files-window__path-crumb">Pablo</span>
+					<span class="files-window__path-separator">/</span>
+					<span class="files-window__path-crumb">Desktop</span>
+					<span class="files-window__path-separator">/</span>
+					<span class="files-window__path-crumb files-window__path-crumb--current">Experiencia</span>
+				</div>
+
+				<div class="files-window__view">
+					<div class="files-window__segmented-control" aria-hidden="true">
+						<button type="button" class="files-window__segment files-window__segment--active" aria-label="Icon view">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<rect x="5" y="5" width="5" height="5" rx="1.2"></rect>
+								<rect x="14" y="5" width="5" height="5" rx="1.2"></rect>
+								<rect x="5" y="14" width="5" height="5" rx="1.2"></rect>
+								<rect x="14" y="14" width="5" height="5" rx="1.2"></rect>
+							</svg>
+						</button>
+						<button type="button" class="files-window__segment" aria-label="List view">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M8 7h11M8 12h11M8 17h11"></path>
+								<circle cx="4.5" cy="7" r="1.1" fill="currentColor" stroke="none"></circle>
+								<circle cx="4.5" cy="12" r="1.1" fill="currentColor" stroke="none"></circle>
+								<circle cx="4.5" cy="17" r="1.1" fill="currentColor" stroke="none"></circle>
+							</svg>
+						</button>
+						<button type="button" class="files-window__segment" aria-label="Column view">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<rect x="4.8" y="5" width="4.1" height="14" rx="1"></rect>
+								<rect x="9.95" y="5" width="4.1" height="14" rx="1"></rect>
+								<rect x="15.1" y="5" width="4.1" height="14" rx="1"></rect>
+							</svg>
+						</button>
+					</div>
+
+					<label class="files-window__search" aria-label="Search">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<circle cx="11" cy="11" r="4.9"></circle>
+							<path d="M15 15 20 20"></path>
+						</svg>
+						<input type="text" value="" placeholder="Search" readonly />
+					</label>
+				</div>
+			</div>
+		</header>
+
+		<div class="files-window__shell">
+			<aside class="files-window__sidebar" aria-label="Sidebar">
+				<div class="files-window__sidebar-section">
+					<span class="files-window__sidebar-title">Favorites</span>
+					<nav class="files-window__places">
+						<button type="button" class="files-window__place">
+							<span class="files-window__place-icon files-window__place-icon--airdrop"></span>
+							<span>AirDrop</span>
+						</button>
+						<button type="button" class="files-window__place">
+							<span class="files-window__place-icon files-window__place-icon--recent"></span>
+							<span>Recents</span>
+						</button>
+						<button type="button" class="files-window__place">
+							<span class="files-window__place-icon files-window__place-icon--folder"></span>
+							<span>Applications</span>
+						</button>
+						<button type="button" class="files-window__place files-window__place--active">
+							<span class="files-window__place-icon files-window__place-icon--folder"></span>
+							<span>Desktop</span>
+						</button>
+						<button type="button" class="files-window__place">
+							<span class="files-window__place-icon files-window__place-icon--folder"></span>
+							<span>Documents</span>
+						</button>
+						<button type="button" class="files-window__place">
+							<span class="files-window__place-icon files-window__place-icon--folder"></span>
+							<span>Downloads</span>
+						</button>
+					</nav>
+				</div>
+
+				<div class="files-window__sidebar-section">
+					<span class="files-window__sidebar-title">iCloud</span>
+					<div class="files-window__sidebar-list">
+						<span class="files-window__sidebar-item">iCloud</span>
+						<span class="files-window__sidebar-item">Shared</span>
+					</div>
+				</div>
+
+				<div class="files-window__sidebar-section">
+					<span class="files-window__sidebar-title">Tags</span>
+					<div class="files-window__sidebar-list">
+						<span class="files-window__sidebar-tag"><i class="files-window__tag-dot files-window__tag-dot--red"></i>Important</span>
+						<span class="files-window__sidebar-tag"><i class="files-window__tag-dot files-window__tag-dot--yellow"></i>Orange</span>
+						<span class="files-window__sidebar-tag"><i class="files-window__tag-dot files-window__tag-dot--purple"></i>Work</span>
+					</div>
+				</div>
+			</aside>
+
+			<section class="files-window__main" aria-label="Folder contents">
+				<div class="files-window__subtoolbar">
+					<div class="files-window__scope">
+						<span class="files-window__scope-label">Search:</span>
+						<button type="button" class="files-window__scope-pill files-window__scope-pill--active">This Mac</button>
+						<button type="button" class="files-window__scope-pill">"Experiencia"</button>
+					</div>
+					<div class="files-window__subactions">
+						<button type="button" class="files-window__mini-button">Save</button>
+						<button type="button" class="files-window__mini-icon-button" aria-label="Add">
+							<span>+</span>
+						</button>
+					</div>
+				</div>
+
+				<div class="files-window__empty" aria-hidden="true">
+					<div class="files-window__empty-badge"></div>
+					<p>No hay elementos todavía</p>
+				</div>
+
+				<footer class="files-window__statusbar">
+					<span>0 items</span>
+					<span>Just now</span>
+				</footer>
+			</section>
+		</div>
+	</div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--n" data-resize-handle="n" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--e" data-resize-handle="e" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--s" data-resize-handle="s" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--w" data-resize-handle="w" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--ne" data-resize-handle="ne" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--nw" data-resize-handle="nw" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--se" data-resize-handle="se" aria-hidden="true"></div>
+	<div class="desktop-window__resize-handle desktop-window__resize-handle--sw" data-resize-handle="sw" aria-hidden="true"></div>
+</section>

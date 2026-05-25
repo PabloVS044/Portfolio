@@ -1,0 +1,31 @@
+---
+import DarkVeil from '../components/DarkVeil.astro';
+import DesktopChrome from '../components/desktop/DesktopChrome.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Pablo Vásquez</title>
+	</head>
+	<body>
+		<div class="terminal-background" aria-hidden="true">
+			<DarkVeil
+				hueShift={45}
+				noiseIntensity={0}
+				scanlineIntensity={0}
+				speed={1.8}
+				scanlineFrequency={50}
+				warpAmount={1}
+				resolutionScale={1.25}
+				aria-hidden="true"
+			/>
+		</div>
+
+		<DesktopChrome />
+	</body>
+</html>
