@@ -685,6 +685,21 @@ export const initDesktop = () => {
 		defaultYOffset: 40,
 		openMode: 'dblclick',
 	});
+	initManagedWindow({
+		windowSelector: '[data-mail-window]',
+		shortcutSelector: '[data-mail-shortcut]',
+		closeSelector: '[data-mail-close]',
+		minimizeSelector: '[data-mail-minimize]',
+		maximizeSelector: '[data-mail-maximize]',
+		dragHandleSelector: '[data-mail-drag]',
+		minWidth: 450,
+		minHeight: 400,
+		defaultWidth: 650,
+		defaultHeight: 500,
+		defaultXRatio: 0.15,
+		defaultYOffset: 60,
+		openMode: 'dblclick',
+	});
 	initDesktopKeyboard();
 	initVscodeShowcase();
 	initTerminalLogic();
