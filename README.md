@@ -18,18 +18,15 @@ Portfolio personal construido como un **desktop de Linux tuneado al estilo macOS
 
 ---
 
-## Backend de IA — Infraestructura interna Apparel Links
+## Backend de IA — Modelo LLM dockerizado
 
-El asistente **Bonzi Buddy** no consume ninguna API de terceros como OpenAI o Anthropic. Consume un servidor de inferencia LLM privado que monté desde cero en Apparel Links S.A.:
+El asistente **Bonzi Buddy** no consume ninguna API de terceros como OpenAI o Anthropic. Consume un servidor de inferencia LLM privado y dockerizado:
 
 - **Modelo**: Qwen3-27B-FP8 (27B parámetros, quantizado a FP8)
 - **Engine de inferencia**: sglang con tensor parallelism en multi-GPU
-- **Hardware**: Intel Xeon W7-3455 · Dual NVIDIA RTX Pro 6000 Blackwell · 256GB RAM
 - **Interfaz**: OpenAI-compatible (`/v1/chat/completions`) — las apps consumen el mismo formato sin cambiar código
 - **Autenticación**: backend propio con sistema de API keys; cada consumidor tiene su propia key
-- **Persistencia**: modelo montado en volumen Docker desde SSD NVMe local — sin re-descarga al reiniciar contenedores
-
-El mismo servidor también alimenta FilesToData (extracción de datos desde PDFs), apps internas web y móvil, y el coding asistido del equipo de desarrollo vía OpenCode.
+- **Persistencia**: modelo montado en volumen Docker — sin re-descarga al reiniciar contenedores
 
 El endpoint `/api/chat` del portfolio actúa como proxy: recibe el mensaje del browser, hace el fetch al servidor LLM con la API key guardada en el servidor, y devuelve la respuesta.
 
@@ -98,7 +95,7 @@ El `Dockerfile` usa `astro.config.docker.mjs` (Node adapter) en lugar del Vercel
 ```env
 PUBLIC_WEB3FORMS_ACCESS_KEY=   # web3forms.com — formulario de contacto
 
-# Servidor LLM on-premise (Apparel Links) — interfaz OpenAI-compatible
+# Servidor LLM dockerizado — interfaz OpenAI-compatible
 PUBLIC_AGENT_API_URL=          # URL base del servidor sglang
 PUBLIC_AGENT_API_KEY=          # API key de acceso
 PUBLIC_AGENT_MODEL=            # Nombre del modelo (ej: Qwen/Qwen3.6-27B-FP8)
@@ -109,8 +106,8 @@ PUBLIC_AGENT_MODEL=            # Nombre del modelo (ej: Qwen/Qwen3.6-27B-FP8)
 ## Tech stack completo
 
 **Frontend** — Astro 6, React 19, Three.js, OGL, GLSL shaders  
-**Backend** — Node.js (Astro SSR), proxy server-side a LLM on-premise  
-**IA** — Qwen3-27B-FP8 via sglang (infraestructura interna Apparel Links)  
+**Backend** — Node.js (Astro SSR), proxy server-side a LLM dockerizado  
+**IA** — Qwen3-27B-FP8 via sglang (modelo LLM privado dockerizado)  
 **Integraciones** — YouTube IFrame API, Web3Forms  
 **Deploy** — Vercel (producción) / Docker + Node standalone (self-hosted)  
 **Tooling** — Vite, npm, Docker
@@ -122,7 +119,7 @@ PUBLIC_AGENT_MODEL=            # Nombre del modelo (ej: Qwen/Qwen3.6-27B-FP8)
 | Proyecto | Descripción | Stack |
 |---|---|---|
 | **FilesToData** | Sistema enterprise de extracción de datos desde PDFs industriales. En producción en Apparel Links. | Blazor, .NET 10, FastAPI, Docker, Azure DI |
-| **AI Inference Server** | Servidor LLM privado on-premise con sglang + Qwen3-27B-FP8. Backend con auth y multi-tenant. | sglang, Docker, Python, NVIDIA CUDA |
+| **AI Inference Server** | Servidor LLM privado dockerizado con sglang + Qwen3-27B-FP8. Backend con auth y multi-tenant. | sglang, Docker, Python, NVIDIA CUDA |
 | **WaterWay+** | Monitoreo del Río Motagua. 1er lugar Hackathon Copernicus 2025 (SENACYT). | React, Leaflet, Node.js, MongoDB |
 | **ChemiQ** | Portal en producción para Asociación de Química UVG. | React, Node.js, PostgreSQL, Supabase |
 | **SeaSOS** | Landing educativa sobre ecosistemas marinos. Mapa interactivo + heatmap. | React, Leaflet, Google Charts, Firebase |
