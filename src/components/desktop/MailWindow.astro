@@ -65,33 +65,35 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 		onsubmit="event.preventDefault();"
 	>
 		<div class="mail-field">
-			<label>Para:</label>
+			<label data-i18n="mail.to">Para:</label>
 			<div class="mail-recipient">pvasquezs044@gmail.com</div>
 		</div>
 
 		<div class="mail-field">
-			<label for="mail-from">De:</label>
+			<label for="mail-from" data-i18n="mail.from">De:</label>
 			<input
 				type="email"
 				id="mail-from"
 				name="email"
 				placeholder="tu@correo.com"
+				data-i18n-attr="placeholder:mail.phEmail"
 				required
 			/>
 		</div>
 
 		<div class="mail-field">
-			<label>Cc/Cco:</label>
+			<label data-i18n="mail.cc">Cc/Cco:</label>
 			<input type="text" disabled placeholder="-" />
 		</div>
 
 		<div class="mail-field">
-			<label for="mail-subject">Asunto:</label>
+			<label for="mail-subject" data-i18n="mail.subject">Asunto:</label>
 			<input
 				type="text"
 				id="mail-subject"
 				name="subject"
 				placeholder="Oportunidad de proyecto, saludo..."
+				data-i18n-attr="placeholder:mail.phSubject"
 				required
 			/>
 		</div>
@@ -101,6 +103,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 				id="mail-body"
 				name="message"
 				placeholder="Escribe tu mensaje aquí..."
+				data-i18n-attr="placeholder:mail.phBody"
 				required></textarea>
 		</div>
 	</form>
@@ -141,7 +144,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 
 				const originalIcon = sendBtn.innerHTML;
 				sendBtn.innerHTML =
-					'<span style="font-size: 12px;">Enviando...</span>';
+					`<span style="font-size: 12px;">${(window as any).t?.('mail.sending') ?? 'Enviando...'}</span>`;
 				sendBtn.style.pointerEvents = "none";
 
 				try {
@@ -167,7 +170,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 					if (response.status === 200) {
 						// Success
 						sendBtn.innerHTML =
-							'<span style="font-size: 12px; color: #34c759;">¡Enviado!</span>';
+							`<span style="font-size: 12px; color: #34c759;">${(window as any).t?.('mail.sent') ?? '¡Enviado!'}</span>`;
 						form.reset();
 						setTimeout(() => {
 							const closeBtn = document.querySelector(
@@ -180,7 +183,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 					} else {
 						console.error(result);
 						sendBtn.innerHTML =
-							'<span style="font-size: 12px; color: #ff3b30;">Error</span>';
+							`<span style="font-size: 12px; color: #ff3b30;">${(window as any).t?.('mail.error') ?? 'Error'}</span>`;
 						setTimeout(() => {
 							sendBtn.innerHTML = originalIcon;
 							sendBtn.style.pointerEvents = "auto";
@@ -189,7 +192,7 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 				} catch (error) {
 					console.error(error);
 					sendBtn.innerHTML =
-						'<span style="font-size: 12px; color: #ff3b30;">Error</span>';
+						`<span style="font-size: 12px; color: #ff3b30;">${(window as any).t?.('mail.error') ?? 'Error'}</span>`;
 					setTimeout(() => {
 						sendBtn.innerHTML = originalIcon;
 						sendBtn.style.pointerEvents = "auto";

@@ -726,66 +726,53 @@ const initTerminalLogic = () => {
 		if (btn) btn.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
 	};
 
+	const t = (key) => (typeof window !== 'undefined' && window.t ? window.t(key) : key);
+
 	const executeCommand = (command) => {
 		const cmd = command.trim().toLowerCase();
-		
+
 		if (!cmd) return;
 
 		printLine(`pablo@portfolio:~$ ${command}`, 'command');
 
 		switch (cmd) {
 			case 'help':
-				printLine(`
-					<span class="highlight">Comandos disponibles:</span><br>
-					<span class="accent">whoami</span>     - ¿Quién soy?<br>
-					<span class="accent">age</span>        - Mi edad<br>
-					<span class="accent">skills</span>     - Mi stack tecnológico<br>
-					<span class="accent">experience</span> - Abre mi historial laboral<br>
-					<span class="accent">projects</span>   - Abre mis proyectos en VS Code<br>
-					<span class="accent">cv</span>         - Abre mi CV en PDF<br>
-					<span class="accent">clear</span>      - Limpia la terminal
-				`);
+				printLine(t('term.help'));
 				break;
 			case 'whoami':
-				printLine(`Soy <span class="highlight">Pablo Vásquez</span>, desarrollador Full Stack & DevOps en Guatemala. Trabajo en Apparel Links S.A. construyendo sistemas internos, pipelines de IA y servidores LLM on-premise. Estudio Ingeniería en Ciencias de la Computación en la UVG.`);
+				printLine(t('term.whoami'));
 				break;
 			case 'age': {
 				const birth = new Date(2004, 7, 20);
 				const now = new Date();
 				let age = now.getFullYear() - birth.getFullYear();
 				if (now < new Date(now.getFullYear(), 7, 20)) age--;
-				printLine(`Tengo <span class="highlight">${age} años</span>. Nacido el 20 de agosto de 2004.`);
+				printLine(t('term.age').replace('{age}', age));
 				break;
 			}
 			case 'skills':
-				printLine(`
-					<span class="highlight">Frontend:</span> React, TypeScript, Astro, Next.js, Tailwind CSS<br>
-					<span class="highlight">Backend:</span> Node.js, Python, FastAPI, .NET / C#, Express<br>
-					<span class="highlight">Bases de datos:</span> PostgreSQL, MongoDB, MySQL, Supabase<br>
-					<span class="highlight">DevOps / Infra:</span> Docker, Linux, Nginx, CI/CD, sglang<br>
-					<span class="highlight">Cloud / Tools:</span> AWS, Azure, Git, Figma
-				`);
+				printLine(t('term.skills'));
 				break;
 			case 'experience':
-				printLine(`Abriendo historial de carrera...`);
+				printLine(t('term.openExp'));
 				triggerShortcut('[data-open-obsidian]');
 				break;
 			case 'projects':
-				printLine(`Abriendo proyectos en VS Code...`);
+				printLine(t('term.openProjects'));
 				triggerShortcut('[data-open-code]');
 				break;
 			case 'cv':
-				printLine(`Abriendo visor de PDF para el CV...`);
+				printLine(t('term.openCv'));
 				triggerShortcut('[data-open-cv]');
 				break;
 			case 'clear':
 				output.innerHTML = '';
 				break;
 			case 'sudo':
-				printLine(`nice try, pero no tienes permisos de sudo aquí.`);
+				printLine(t('term.sudo'));
 				break;
 			default:
-				printLine(`Comando no encontrado: ${cmd}. Escribe <span class="accent">help</span> para ver la lista de comandos.`);
+				printLine(t('term.notFound').replace('{cmd}', cmd));
 		}
 	};
 
@@ -801,5 +788,5 @@ const initTerminalLogic = () => {
 	});
 
 	// Initial message
-	printLine(`Bienvenido a mi portafolio OS (v1.0.0)<br>Escribe <span class="accent">help</span> para ver los comandos disponibles.`);
+	printLine(t('term.welcome'));
 };

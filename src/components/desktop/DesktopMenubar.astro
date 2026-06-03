@@ -9,7 +9,162 @@
 		</nav>
 	</div>
 
-	<div class="desktop-menubar__right" aria-hidden="true">
-		<span class="desktop-menubar__clock" data-desktop-clock>Wed Sep 30 09:05 AM</span>
+	<div class="desktop-menubar__right">
+		<div class="desktop-menubar__lang" data-lang-switcher>
+			<button type="button" class="desktop-menubar__lang-btn" data-lang-toggle aria-haspopup="true" aria-expanded="false" aria-label="Change language / Cambiar idioma">
+				<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="10"></circle>
+					<line x1="2" y1="12" x2="22" y2="12"></line>
+					<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+				</svg>
+				<span data-lang-current>ES</span>
+			</button>
+			<div class="desktop-menubar__lang-menu" data-lang-menu hidden>
+				<button type="button" class="desktop-menubar__lang-option" data-set-lang="es"><span>🇪🇸</span> Español</button>
+				<button type="button" class="desktop-menubar__lang-option" data-set-lang="en"><span>🇺🇸</span> English</button>
+				<button type="button" class="desktop-menubar__lang-option" data-set-lang="ko"><span>🇰🇷</span> 한국어</button>
+			</div>
+		</div>
+		<span class="desktop-menubar__clock" data-desktop-clock aria-hidden="true">Wed Sep 30 09:05 AM</span>
 	</div>
 </header>
+
+<style>
+	.desktop-menubar__right {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.desktop-menubar__lang {
+		position: relative;
+	}
+
+	.desktop-menubar__lang-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		appearance: none;
+		background: transparent;
+		border: none;
+		color: inherit;
+		font: inherit;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		padding: 0.15rem 0.45rem;
+		border-radius: 0.45rem;
+		cursor: pointer;
+		transition: background-color 150ms ease;
+	}
+
+	.desktop-menubar__lang-btn:hover,
+	.desktop-menubar__lang[data-open='true'] .desktop-menubar__lang-btn {
+		background: rgba(255, 255, 255, 0.14);
+	}
+
+	.desktop-menubar__lang-menu {
+		position: absolute;
+		top: calc(100% + 0.4rem);
+		right: 0;
+		min-width: 9.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		padding: 0.3rem;
+		background: rgba(34, 34, 38, 0.92);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 0.6rem;
+		box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.45);
+		backdrop-filter: blur(22px) saturate(140%);
+		z-index: 200;
+	}
+
+	.desktop-menubar__lang-menu[hidden] {
+		display: none;
+	}
+
+	.desktop-menubar__lang-option {
+		display: flex;
+		align-items: center;
+		gap: 0.55rem;
+		appearance: none;
+		background: transparent;
+		border: none;
+		color: rgba(244, 246, 249, 0.9);
+		font: inherit;
+		font-size: 0.82rem;
+		text-align: left;
+		padding: 0.4rem 0.55rem;
+		border-radius: 0.4rem;
+		cursor: pointer;
+		transition: background-color 140ms ease;
+	}
+
+	.desktop-menubar__lang-option:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.desktop-menubar__lang-option[data-active='true'] {
+		background: rgba(59, 130, 246, 0.22);
+		color: #93c5fd;
+	}
+</style>
+
+<script>
+	const LABELS = { es: 'ES', en: 'EN', ko: '한' };
+
+	const initLangSwitcher = () => {
+		const win = window as any;
+		const root = document.querySelector('[data-lang-switcher]');
+		if (!root) return;
+
+		const toggle = root.querySelector('[data-lang-toggle]') as HTMLElement;
+		const menu = root.querySelector('[data-lang-menu]') as HTMLElement;
+		const current = root.querySelector('[data-lang-current]');
+		const options = Array.from(root.querySelectorAll('[data-set-lang]'));
+
+		const closeMenu = () => {
+			menu.hidden = true;
+			root.removeAttribute('data-open');
+			toggle.setAttribute('aria-expanded', 'false');
+		};
+
+		const syncActive = () => {
+			const lang = win.__lang || 'es';
+			if (current) current.textContent = LABELS[lang] ?? 'ES';
+			options.forEach((opt) => {
+				opt.setAttribute('data-active', opt.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+			});
+		};
+
+		toggle.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const willOpen = menu.hidden;
+			menu.hidden = !willOpen;
+			root.setAttribute('data-open', willOpen ? 'true' : 'false');
+			toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+		});
+
+		options.forEach((opt) => {
+			opt.addEventListener('click', () => {
+				const lang = opt.getAttribute('data-set-lang');
+				win.setLang?.(lang);
+				closeMenu();
+			});
+		});
+
+		document.addEventListener('click', (e) => {
+			if (!root.contains(e.target as Node)) closeMenu();
+		});
+
+		document.addEventListener('i18n:change', syncActive);
+		syncActive();
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initLangSwitcher);
+	} else {
+		initLangSwitcher();
+	}
+</script>

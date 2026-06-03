@@ -26,10 +26,10 @@
 		<div class="obsidian-app__body">
 			<!-- Sidebar -->
 			<aside class="obsidian-app__sidebar">
-				<div class="obsidian-app__sidebar-header">FILES</div>
+				<div class="obsidian-app__sidebar-header" data-i18n="obs.files">FILES</div>
 				<nav class="obsidian-app__file-tree">
 					<details class="obsidian-app__folder" open>
-						<summary class="obsidian-app__folder-name">Experiencia</summary>
+						<summary class="obsidian-app__folder-name" data-i18n="obs.folderExp">Experiencia</summary>
 						<div class="obsidian-app__folder-content">
 							<button type="button" class="obsidian-app__file obsidian-app__file--active" data-obsidian-file="empresa1">
 								<svg viewBox="0 0 24 24" class="obsidian-app__file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -43,7 +43,7 @@
 					</details>
 					
 					<details class="obsidian-app__folder" open>
-						<summary class="obsidian-app__folder-name">Formación</summary>
+						<summary class="obsidian-app__folder-name" data-i18n="obs.folderEdu">Formación</summary>
 						<div class="obsidian-app__folder-content">
 							<button type="button" class="obsidian-app__file" data-obsidian-file="edu">
 								<svg viewBox="0 0 24 24" class="obsidian-app__file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -63,7 +63,7 @@
 				<!-- Empresa 1 View -->
 				<article class="obsidian-app__document" data-obsidian-view="empresa1">
 					<div class="obsidian-app__doc-header">
-						<h1># Desarrollador de Software e IA</h1>
+						<h1 data-i18n="obs.e1.h1"># Desarrollador de Software e IA</h1>
 						<div class="obsidian-app__tags">
 							<span class="obsidian-app__tag" style="background: rgba(59,130,246,0.2); color: #93c5fd;">#full-stack</span>
 							<span class="obsidian-app__tag" style="background: rgba(34,197,94,0.2); color: #86efac;">#mlops</span>
@@ -72,24 +72,24 @@
 						</div>
 					</div>
 					<div class="obsidian-app__doc-content">
-						<h2>## Apparel Links S.A., Guatemala (Ene. 2025 – Actualidad)</h2>
-						<p>Empresa del sector textil/apparel con operaciones en Guatemala y clientes internacionales (Corea, EEUU). Trabajo en el área de tecnología desarrollando sistemas internos, infraestructura de IA y automatización de procesos industriales.</p>
-						<h2>### FilesToData — Sistema de extracción de PDFs de producción</h2>
+						<h2 data-i18n="obs.e1.h2a">## Apparel Links S.A., Guatemala (Ene. 2025 – Actualidad)</h2>
+						<p data-i18n="obs.e1.p">Empresa del sector textil/apparel con operaciones en Guatemala y clientes internacionales (Corea, EEUU). Trabajo en el área de tecnología desarrollando sistemas internos, infraestructura de IA y automatización de procesos industriales.</p>
+						<h2 data-i18n="obs.e1.h2b">### FilesToData — Sistema de extracción de PDFs de producción</h2>
 						<ul>
-							<li>Diseñé y desarrollé de cero un sistema enterprise que automatiza el ingreso de órdenes de producción desde PDFs (español, inglés, coreano) hacia el ERP.</li>
-							<li>Stack: Blazor Server (.NET 10) + FastAPI (Python 3.11) + Azure Document Intelligence + MongoDB + Azure SQL. Arquitectura Clean en el backend Python.</li>
-							<li>Deploy en servidor físico Ubuntu con Docker Compose, Nginx como reverse proxy y Cloudflare Tunnel para HTTPS sin abrir puertos.</li>
+							<li data-i18n="obs.e1.l1">Diseñé y desarrollé de cero un sistema enterprise que automatiza el ingreso de órdenes de producción desde PDFs (español, inglés, coreano) hacia el ERP.</li>
+							<li data-i18n="obs.e1.l2">Stack: Blazor Server (.NET 10) + FastAPI (Python 3.11) + Azure Document Intelligence + MongoDB + Azure SQL. Arquitectura Clean en el backend Python.</li>
+							<li data-i18n="obs.e1.l3">Deploy en servidor físico Ubuntu con Docker Compose, Nginx como reverse proxy y Cloudflare Tunnel para HTTPS sin abrir puertos.</li>
 						</ul>
-						<h2>### Servidor LLM On-Premise — Qwen3-27B-FP8</h2>
+						<h2 data-i18n="obs.e1.h2c">### Servidor LLM On-Premise — Qwen3-27B-FP8</h2>
 						<ul>
-							<li>Monté desde cero un servidor de inferencia privado con sglang sobre hardware dedicado: Intel Xeon W7-3455, dual NVIDIA RTX Pro 6000 Blackwell, 256GB RAM.</li>
-							<li>El modelo Qwen3-27B-FP8 corre con tensor parallelism en las dos GPUs. Interfaz OpenAI-compatible para integración transparente en apps existentes.</li>
-							<li>Backend propio de autenticación con sistema de API keys por consumidor. Lo usan: FilesToData, apps internas web y móvil, y el equipo de devs vía OpenCode.</li>
+							<li data-i18n="obs.e1.l4">Monté desde cero un servidor de inferencia privado con sglang sobre hardware dedicado: Intel Xeon W7-3455, dual NVIDIA RTX Pro 6000 Blackwell, 256GB RAM.</li>
+							<li data-i18n="obs.e1.l5">El modelo Qwen3-27B-FP8 corre con tensor parallelism en las dos GPUs. Interfaz OpenAI-compatible para integración transparente en apps existentes.</li>
+							<li data-i18n="obs.e1.l6">Backend propio de autenticación con sistema de API keys por consumidor. Lo usan: FilesToData, apps internas web y móvil, y el equipo de devs vía OpenCode.</li>
 						</ul>
-						<h2>### Infraestructura y DevOps</h2>
+						<h2 data-i18n="obs.e1.h2d">### Infraestructura y DevOps</h2>
 						<ul>
-							<li>Administración de servidores Linux en producción, CI/CD, gestión de contenedores con Portainer CE.</li>
-							<li>Configuración de entornos de desarrollo asistido por IA para el equipo usando OpenCode con perfiles custom que apuntan al servidor LLM interno.</li>
+							<li data-i18n="obs.e1.l7">Administración de servidores Linux en producción, CI/CD, gestión de contenedores con Portainer CE.</li>
+							<li data-i18n="obs.e1.l8">Configuración de entornos de desarrollo asistido por IA para el equipo usando OpenCode con perfiles custom que apuntan al servidor LLM interno.</li>
 						</ul>
 					</div>
 				</article>
@@ -97,7 +97,7 @@
 				<!-- Empresa 2 View -->
 				<article class="obsidian-app__document" data-obsidian-view="empresa2" hidden>
 					<div class="obsidian-app__doc-header">
-						<h1># Soporte Técnico y Desarrollo Web</h1>
+						<h1 data-i18n="obs.e2.h1"># Soporte Técnico y Desarrollo Web</h1>
 						<div class="obsidian-app__tags">
 							<span class="obsidian-app__tag" style="background: rgba(59,130,246,0.2); color: #93c5fd;">#experience</span>
 							<span class="obsidian-app__tag" style="background: rgba(234,179,8,0.2); color: #fde047;">#it-support</span>
@@ -105,12 +105,12 @@
 						</div>
 					</div>
 					<div class="obsidian-app__doc-content">
-						<h2>## Transcafe S.A., Guatemala (Jul. 2023 – Nov. 2023)</h2>
-						<p>Empresa del sector de café en Guatemala. Primer trabajo formal en tecnología, combinando soporte técnico con desarrollo web durante mi formación en Kinal.</p>
+						<h2 data-i18n="obs.e2.h2">## Transcafe S.A., Guatemala (Jul. 2023 – Nov. 2023)</h2>
+						<p data-i18n="obs.e2.p">Empresa del sector de café en Guatemala. Primer trabajo formal en tecnología, combinando soporte técnico con desarrollo web durante mi formación en Kinal.</p>
 						<ul>
-							<li><strong>Soporte IT:</strong> Mantenimiento, configuración y diagnóstico de equipos y redes. Punto de contacto para incidencias técnicas del personal.</li>
-							<li><strong>Administración de sistemas:</strong> Monitoreo básico de servidores y gestión de disponibilidad de servicios internos.</li>
-							<li><strong>Desarrollo web:</strong> Mejoras y mantenimiento del sitio web corporativo. Primera experiencia real trabajando con código en un entorno de producción.</li>
+							<li data-i18n-html="obs.e2.l1"><strong>Soporte IT:</strong> Mantenimiento, configuración y diagnóstico de equipos y redes. Punto de contacto para incidencias técnicas del personal.</li>
+							<li data-i18n-html="obs.e2.l2"><strong>Administración de sistemas:</strong> Monitoreo básico de servidores y gestión de disponibilidad de servicios internos.</li>
+							<li data-i18n-html="obs.e2.l3"><strong>Desarrollo web:</strong> Mejoras y mantenimiento del sitio web corporativo. Primera experiencia real trabajando con código en un entorno de producción.</li>
 						</ul>
 					</div>
 				</article>
@@ -118,23 +118,23 @@
 				<!-- Edu View -->
 				<article class="obsidian-app__document" data-obsidian-view="edu" hidden>
 					<div class="obsidian-app__doc-header">
-						<h1># Universidad del Valle de Guatemala</h1>
+						<h1 data-i18n="obs.edu.h1"># Universidad del Valle de Guatemala</h1>
 						<div class="obsidian-app__tags">
 							<span class="obsidian-app__tag" style="background: rgba(59,130,246,0.2); color: #93c5fd;">#cs</span>
 							<span class="obsidian-app__tag" style="background: rgba(34,197,94,0.2); color: #86efac;">#beca</span>
 						</div>
 					</div>
 					<div class="obsidian-app__doc-content">
-						<h2>## Ingeniería en Ciencias de la Computación y TI (2024 – 2028)</h2>
-						<p>Carrera de ingeniería en una de las universidades más exigentes de Centroamérica. Cursando tercer año mientras trabajo full-time en Apparel Links.</p>
-						<h2>### Beca por mérito académico</h2>
+						<h2 data-i18n="obs.edu.h2a">## Ingeniería en Ciencias de la Computación y TI (2024 – 2028)</h2>
+						<p data-i18n="obs.edu.p">Carrera de ingeniería en una de las universidades más exigentes de Centroamérica. Cursando tercer año mientras trabajo full-time en Apparel Links.</p>
+						<h2 data-i18n="obs.edu.h2b">### Beca por mérito académico</h2>
 						<ul>
-							<li>Becario del Programa de Becas Universitarias de la <strong>Fundación Juan Bautista Gutiérrez</strong>, otorgada por rendimiento académico sobresaliente y liderazgo estudiantil.</li>
+							<li data-i18n-html="obs.edu.l1">Becario del Programa de Becas Universitarias de la <strong>Fundación Juan Bautista Gutiérrez</strong>, otorgada por rendimiento académico sobresaliente y liderazgo estudiantil.</li>
 						</ul>
-						<h2>### Hackatón Copernicus 2025 — 1er Lugar</h2>
+						<h2 data-i18n="obs.edu.h2c">### Hackatón Copernicus 2025 — 1er Lugar</h2>
 						<ul>
-							<li>Primer lugar nacional en la Hackatón organizada por <strong>SENACYT</strong> usando datos satelitales del programa espacial europeo Copernicus.</li>
-							<li>Proyecto: <strong>WaterWay+</strong> — plataforma de monitoreo del Río Motagua con datos Sentinel-2, reportes ciudadanos geolocalizados y análisis con OpenAI. Construido en 48 horas.</li>
+							<li data-i18n-html="obs.edu.l2">Primer lugar nacional en la Hackatón organizada por <strong>SENACYT</strong> usando datos satelitales del programa espacial europeo Copernicus.</li>
+							<li data-i18n-html="obs.edu.l3">Proyecto: <strong>WaterWay+</strong> — plataforma de monitoreo del Río Motagua con datos Sentinel-2, reportes ciudadanos geolocalizados y análisis con OpenAI. Construido en 48 horas.</li>
 						</ul>
 					</div>
 				</article>
@@ -142,19 +142,19 @@
 				<!-- Certs View -->
 				<article class="obsidian-app__document" data-obsidian-view="cert" hidden>
 					<div class="obsidian-app__doc-header">
-						<h1># Centro Educativo Técnico Laboral Kinal</h1>
+						<h1 data-i18n="obs.cert.h1"># Centro Educativo Técnico Laboral Kinal</h1>
 						<div class="obsidian-app__tags">
 							<span class="obsidian-app__tag" style="background: rgba(168,85,247,0.2); color: #d8b4fe;">#técnico</span>
 						</div>
 					</div>
 					<div class="obsidian-app__doc-content">
-						<h2>## Perito en Computación (2021 – 2023)</h2>
-						<p>Formación técnica de tres años donde construí las bases sólidas que luego apliqué en mi carrera profesional. Kinal es uno de los centros técnicos de referencia en Guatemala.</p>
+						<h2 data-i18n="obs.cert.h2">## Perito en Computación (2021 – 2023)</h2>
+						<p data-i18n="obs.cert.p">Formación técnica de tres años donde construí las bases sólidas que luego apliqué en mi carrera profesional. Kinal es uno de los centros técnicos de referencia en Guatemala.</p>
 						<ul>
-							<li><strong>Fundamentos de programación:</strong> Lógica, algoritmos, estructuras de datos y primeros proyectos en lenguajes como Java y C.</li>
-							<li><strong>Bases de datos:</strong> Diseño relacional, SQL, MySQL — base de lo que hoy aplico en proyectos como ChemiQ y FilesToData.</li>
-							<li><strong>Redes y sistemas:</strong> Configuración de redes, administración básica de sistemas operativos y servidores. Punto de partida para el trabajo actual en infraestructura Linux.</li>
-							<li>Acá también conseguí mi primer trabajo (Transcafe) y empecé a construir portafolio mientras estudiaba.</li>
+							<li data-i18n-html="obs.cert.l1"><strong>Fundamentos de programación:</strong> Lógica, algoritmos, estructuras de datos y primeros proyectos en lenguajes como Java y C.</li>
+							<li data-i18n-html="obs.cert.l2"><strong>Bases de datos:</strong> Diseño relacional, SQL, MySQL — base de lo que hoy aplico en proyectos como ChemiQ y FilesToData.</li>
+							<li data-i18n-html="obs.cert.l3"><strong>Redes y sistemas:</strong> Configuración de redes, administración básica de sistemas operativos y servidores. Punto de partida para el trabajo actual en infraestructura Linux.</li>
+							<li data-i18n="obs.cert.l4">Acá también conseguí mi primer trabajo (Transcafe) y empecé a construir portafolio mientras estudiaba.</li>
 						</ul>
 					</div>
 				</article>

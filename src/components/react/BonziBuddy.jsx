@@ -1,7 +1,43 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './css/BonziBuddy.css';
 
-const SYSTEM_PROMPT = `Eres Bonzi, el asistente de IA del portafolio de Pablo Vásquez. Respondes preguntas sobre Pablo de forma amigable y concisa (máximo 3 oraciones). Hablas en español.
+const LANG_DIRECTIVE = {
+	es: 'Respondes preguntas sobre Pablo de forma amigable y concisa (máximo 3 oraciones). Hablas SIEMPRE en español.',
+	en: 'You answer questions about Pablo in a friendly and concise way (max 3 sentences). You ALWAYS speak English.',
+	ko: 'Pablo에 대한 질문에 친근하고 간결하게(최대 3문장) 답합니다. 항상 한국어로 말합니다.',
+};
+
+const UI = {
+	es: {
+		header: '💬 Pregúntale a Bonzi',
+		close: 'Cerrar',
+		placeholder: '¿Qué proyectos tiene Pablo?',
+		thinking: 'Pensando…',
+		aria: 'Bonzi — asistente de IA. Click para chatear.',
+		fallback: 'No pude responder, intenta de nuevo.',
+		error: '¡Oops! No pude conectar al servidor. Intenta de nuevo.',
+	},
+	en: {
+		header: '💬 Ask Bonzi',
+		close: 'Close',
+		placeholder: 'What projects has Pablo built?',
+		thinking: 'Thinking…',
+		aria: 'Bonzi — AI assistant. Click to chat.',
+		fallback: "I couldn't reply, please try again.",
+		error: 'Oops! I could not reach the server. Please try again.',
+	},
+	ko: {
+		header: '💬 Bonzi에게 물어보기',
+		close: '닫기',
+		placeholder: 'Pablo는 어떤 프로젝트를 만들었나요?',
+		thinking: '생각 중…',
+		aria: 'Bonzi — AI 어시스턴트. 클릭하여 채팅하세요.',
+		fallback: '답변하지 못했어요. 다시 시도해 주세요.',
+		error: '앗! 서버에 연결할 수 없어요. 다시 시도해 주세요.',
+	},
+};
+
+const getSystemPrompt = (lang) => `Eres Bonzi, el asistente de IA del portafolio de Pablo Vásquez. ${LANG_DIRECTIVE[lang] || LANG_DIRECTIVE.es}
 
 Cuando sea relevante, sugiere abrir una app añadiendo UNA de estas etiquetas al FINAL de tu respuesta (nunca en medio):
 #open:projects #open:career #open:cv #open:skills #open:contact #open:about
@@ -40,6 +76,8 @@ export default function BonziBuddy() {
 	const [inputVal, setInputVal] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [history, setHistory] = useState([]);
+	const [lang, setLang] = useState(typeof window !== 'undefined' ? (window.__lang || 'es') : 'es');
+	const ui = UI[lang] || UI.es;
 	const bubbleTimer = useRef(null);
 	const dragMoved = useRef(false);
 	const inputRef = useRef(null);
@@ -55,6 +93,13 @@ export default function BonziBuddy() {
 	useEffect(() => {
 		if (chatOpen) setTimeout(() => inputRef.current?.focus(), 60);
 	}, [chatOpen]);
+
+	// Sync language with the global i18n runtime
+	useEffect(() => {
+		const onChange = (e) => setLang(e.detail?.lang || window.__lang || 'es');
+		document.addEventListener('i18n:change', onChange);
+		return () => document.removeEventListener('i18n:change', onChange);
+	}, []);
 
 	// Drag
 	const handlePointerDown = useCallback((e) => {
@@ -124,7 +169,7 @@ export default function BonziBuddy() {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					messages: [
-						{ role: 'system', content: SYSTEM_PROMPT },
+						{ role: 'system', content: getSystemPrompt(lang) },
 						...newHistory,
 					],
 				}),
@@ -135,7 +180,7 @@ export default function BonziBuddy() {
 			const data = await res.json();
 			const msg = data.choices?.[0]?.message;
 			const rawReply = msg?.content ?? msg?.reasoning ?? null;
-			let reply = rawReply?.trim() || 'No pude responder, intenta de nuevo.';
+			let reply = rawReply?.trim() || ui.fallback;
 
 			// Extract action tag
 			let action = null;
@@ -156,10 +201,10 @@ export default function BonziBuddy() {
 			}
 		} catch (err) {
 			setLoading(false);
-			showBubble('¡Oops! No pude conectar al servidor. Intenta de nuevo.');
+			showBubble(ui.error);
 			setAgentState('idle');
 		}
-	}, [inputVal, loading, history]);
+	}, [inputVal, loading, history, lang, ui]);
 
 	const handleKeyDown = (e) => {
 		if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
@@ -188,7 +233,7 @@ export default function BonziBuddy() {
 				className={`bonzi-sprite bonzi-sprite--${agentState}`}
 				onPointerDown={handlePointerDown}
 				onClick={handleSpriteClick}
-				aria-label="Bonzi — asistente de IA. Click para chatear."
+				aria-label={ui.aria}
 				role="button"
 				tabIndex={0}
 			>
@@ -207,11 +252,11 @@ export default function BonziBuddy() {
 					onClick={(e) => e.stopPropagation()}
 				>
 					<div className="bonzi-chat-header">
-						<span>💬 Pregúntale a Bonzi</span>
+						<span>{ui.header}</span>
 						<button
 							className="bonzi-chat-close"
 							onClick={() => setChatOpen(false)}
-							aria-label="Cerrar"
+							aria-label={ui.close}
 						>×</button>
 					</div>
 
@@ -220,7 +265,7 @@ export default function BonziBuddy() {
 							ref={inputRef}
 							className="bonzi-input"
 							type="text"
-							placeholder={loading ? 'Pensando…' : '¿Qué proyectos tiene Pablo?'}
+							placeholder={loading ? ui.thinking : ui.placeholder}
 							value={inputVal}
 							onChange={(e) => setInputVal(e.target.value)}
 							onKeyDown={handleKeyDown}

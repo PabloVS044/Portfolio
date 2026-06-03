@@ -354,7 +354,7 @@ const projects = [
 					<span class="code-window__crumb-icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24"><path d="M4.8 10.2 12 4.8l7.2 5.4v8.6H14v-4.6h-4v4.6H4.8z"></path></svg>
 					</span>
-					<span class="code-window__crumb">Projects</span>
+					<span class="code-window__crumb" data-i18n="vsc.projects">Projects</span>
 					<span class="code-window__crumb-separator" aria-hidden="true">
 						<svg viewBox="0 0 24 24"><path d="m9 6.5 6 5.5-6 5.5"></path></svg>
 					</span>
@@ -380,7 +380,7 @@ const projects = [
 		<div class="code-window__shell">
 			<!-- Sidebar: lista de proyectos -->
 			<aside class="code-window__explorer" aria-label="Lista de proyectos">
-				<div class="code-window__explorer-heading">PROYECTOS</div>
+				<div class="code-window__explorer-heading" data-i18n="vsc.explorerHeading">PROYECTOS</div>
 				<nav class="code-window__project-list">
 					{projects.map((project, index) => (
 						<button
@@ -425,17 +425,17 @@ const projects = [
 								<div class="code-window__hero-copy">
 									<div class="code-window__hero-meta">
 										<p class="code-window__eyebrow">{project.fileName}</p>
-										<span class="code-window__category-badge">{project.category}</span>
+										<span class="code-window__category-badge" data-i18n={`vsc.${project.id}.category`}>{project.category}</span>
 									</div>
 									<h3>{project.title}</h3>
-									<p class="code-window__subtitle">{project.subtitle}</p>
-									<p class="code-window__description">{project.description}</p>
+									<p class="code-window__subtitle" data-i18n={`vsc.${project.id}.subtitle`}>{project.subtitle}</p>
+									<p class="code-window__description" data-i18n={`vsc.${project.id}.description`}>{project.description}</p>
 
 									<div class="code-window__actions">
 										{project.links.map((link, linkIndex) => (
 											link.href && link.href !== '#'
-												? <a href={link.href} target="_blank" rel="noopener noreferrer" class={`code-window__action ${linkIndex === 0 ? 'code-window__action--primary' : ''}`}>{link.label}</a>
-												: <span class={`code-window__action code-window__action--locked`}>{link.label}</span>
+												? <a href={link.href} target="_blank" rel="noopener noreferrer" class={`code-window__action ${linkIndex === 0 ? 'code-window__action--primary' : ''}`} data-i18n={`vsc.${project.id}.link.${linkIndex}`}>{link.label}</a>
+												: <span class={`code-window__action code-window__action--locked`} data-i18n={`vsc.${project.id}.link.${linkIndex}`}>{link.label}</span>
 										))}
 									</div>
 								</div>
@@ -443,27 +443,27 @@ const projects = [
 
 							<!-- Métricas -->
 							<div class="code-window__metrics-row">
-								{project.metrics.map((metric) => (
+								{project.metrics.map((metric, mi) => (
 									<div class="code-window__metric-card">
-										<span class="code-window__metric-label">{metric.label}</span>
-										<strong>{metric.value}</strong>
-										<span class="code-window__metric-meta">{metric.meta}</span>
+										<span class="code-window__metric-label" data-i18n={`vsc.${project.id}.metric.${mi}.label`}>{metric.label}</span>
+										<strong data-i18n={`vsc.${project.id}.metric.${mi}.value`}>{metric.value}</strong>
+										<span class="code-window__metric-meta" data-i18n={`vsc.${project.id}.metric.${mi}.meta`}>{metric.meta}</span>
 									</div>
 								))}
 							</div>
 
 							<!-- Overview -->
 							<div class="code-window__content-block">
-								<h4>Contexto</h4>
-								<p>{project.overview}</p>
+								<h4 data-i18n="vsc.context">Contexto</h4>
+								<p data-i18n={`vsc.${project.id}.overview`}>{project.overview}</p>
 							</div>
 
 							<!-- Features -->
 							<div class="code-window__feature-grid">
-								{project.features.map((feature) => (
+								{project.features.map((feature, fi) => (
 									<div class="code-window__feature-card">
-										<h5>{feature.title}</h5>
-										<p>{feature.description}</p>
+										<h5 data-i18n={`vsc.${project.id}.feat.${fi}.t`}>{feature.title}</h5>
+										<p data-i18n={`vsc.${project.id}.feat.${fi}.d`}>{feature.description}</p>
 									</div>
 								))}
 							</div>
@@ -479,8 +479,8 @@ const projects = [
 						>
 							<div class="code-window__section-header">
 								<p class="code-window__eyebrow">Learnings.md</p>
-								<h3>Lo que este proyecto me enseñó</h3>
-								<p class="code-window__description">
+								<h3 data-i18n="vsc.learningsTitle">Lo que este proyecto me enseñó</h3>
+								<p class="code-window__description" data-i18n="vsc.learningsDesc">
 									Las decisiones técnicas que haría diferente, lo que funcionó mejor de lo esperado, y lo que no aparece en los tutoriales.
 								</p>
 							</div>
@@ -489,7 +489,7 @@ const projects = [
 								{project.learnings.map((learning, index) => (
 									<div class="code-window__learning-card">
 										<span class="code-window__learning-index">0{index + 1}</span>
-										<p>{learning}</p>
+										<p data-i18n={`vsc.${project.id}.learn.${index}`}>{learning}</p>
 									</div>
 								))}
 							</div>
@@ -507,27 +507,27 @@ const projects = [
 						style={`--code-accent: ${project.accent};`}
 						hidden={index !== 0}
 					>
-						<h4>DETALLES</h4>
+						<h4 data-i18n="vsc.detailsHeading">DETALLES</h4>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Año</span>
+							<span class="code-window__detail-label" data-i18n="vsc.year">Año</span>
 							<strong>{project.year}</strong>
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Rol</span>
-							<strong>{project.role}</strong>
+							<span class="code-window__detail-label" data-i18n="vsc.role">Rol</span>
+							<strong data-i18n={`vsc.${project.id}.role`}>{project.role}</strong>
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Estado</span>
+							<span class="code-window__detail-label" data-i18n="vsc.statusLabel">Estado</span>
 							<strong class={`code-window__status code-window__status--${project.statusTone}`}>
-								<i></i>{project.status}
+								<i></i><span data-i18n={`vsc.${project.id}.status`}>{project.status}</span>
 							</strong>
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Stack</span>
+							<span class="code-window__detail-label" data-i18n="vsc.stack">Stack</span>
 							<ul class="code-window__stack-list">
 								{project.stack.map((item) => {
 									const icon = ICON_MAP[item];
@@ -542,19 +542,19 @@ const projects = [
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Links</span>
+							<span class="code-window__detail-label" data-i18n="vsc.links">Links</span>
 							<div class="code-window__link-list">
-								{project.links.map((link) => (
+								{project.links.map((link, li) => (
 									link.href && link.href !== '#'
 										? <a href={link.href} target="_blank" rel="noopener noreferrer" class="code-window__detail-link">
-											{link.label}
+											<span data-i18n={`vsc.${project.id}.link.${li}`}>{link.label}</span>
 											<svg viewBox="0 0 24 24" aria-hidden="true">
 												<path d="M14 5h5v5"></path>
 												<path d="M10 14 19 5"></path>
 												<path d="M19 13v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"></path>
 											</svg>
 										</a>
-										: <span class="code-window__detail-link code-window__detail-link--disabled">{link.label}</span>
+										: <span class="code-window__detail-link code-window__detail-link--disabled" data-i18n={`vsc.${project.id}.link.${li}`}>{link.label}</span>
 								))}
 							</div>
 						</div>

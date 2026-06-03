@@ -65,17 +65,17 @@ const songs = [
 		<div class="music-playlist-header">
 			<img src="/player/portada.jpg" alt="Playlist Cover" class="playlist-cover-large" />
 			<div class="playlist-info">
-				<span class="playlist-type">PLAYLIST</span>
+				<span class="playlist-type" data-i18n="music.type">PLAYLIST</span>
 				<h1 class="playlist-title">Daily Soundtrack</h1>
-				<p class="playlist-description">Una muy pequeña selección de canciones que conforman el soundtrack de mi día a día, ya sea programando, diseñando o haciendo otras cosas.</p>
-				<p class="playlist-meta">Pablo Vásquez • 11 canciones</p>
+				<p class="playlist-description" data-i18n="music.desc">Una muy pequeña selección de canciones que conforman el soundtrack de mi día a día, ya sea programando, diseñando o haciendo otras cosas.</p>
+				<p class="playlist-meta" data-i18n="music.meta">Pablo Vásquez • 11 canciones</p>
 			</div>
 		</div>
 
 		<div class="music-tracks-container">
 			<div class="tracks-header">
 				<div class="track-col-hash">#</div>
-				<div class="track-col-title">TÍTULO</div>
+				<div class="track-col-title" data-i18n="music.colTitle">TÍTULO</div>
 			</div>
 			<div class="tracks-list">
 				{songs.map((song, index) => (

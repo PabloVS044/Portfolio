@@ -176,11 +176,11 @@ const skills = [
 			<table class="skills-table">
 				<thead>
 					<tr>
-						<th>Process Name</th>
-						<th>Category</th>
-						<th>User</th>
-						<th>PID</th>
-						<th>Status</th>
+						<th data-i18n="skills.colProcess">Process Name</th>
+						<th data-i18n="skills.colCategory">Category</th>
+						<th data-i18n="skills.colUser">User</th>
+						<th data-i18n="skills.colPid">PID</th>
+						<th data-i18n="skills.colStatus">Status</th>
 					</tr>
 				</thead>
 				<tbody id="skills-tbody">
@@ -192,13 +192,13 @@ const skills = [
 									{skill.name}
 								</div>
 							</td>
-							<td>{skill.category}</td>
+							<td><span data-i18n={`cat.${skill.category}`}>{skill.category}</span></td>
 							<td>pablo</td>
 							<td>{skill.pid}</td>
 							<td>
 								<div class="skill-status">
 									<span class="status-dot"></span>
-									Running
+									<span data-i18n="skills.running">Running</span>
 								</div>
 							</td>
 						</tr>
@@ -208,7 +208,7 @@ const skills = [
 		</div>
 		
 		<aside class="skills-detail-pane">
-			<div class="skill-empty-state" id="skill-empty-state">
+			<div class="skill-empty-state" id="skill-empty-state" data-i18n="skills.empty">
 				Select a process to view details
 			</div>
 			
@@ -221,7 +221,7 @@ const skills = [
 					</div>
 				</div>
 				<div class="skill-detail-body">
-					<strong>Implementación:</strong>
+					<strong data-i18n="skills.impl">Implementación:</strong>
 					<p id="detail-description"></p>
 				</div>
 			</div>
@@ -250,29 +250,36 @@ const skills = [
 		const detailCategory = document.getElementById('detail-category');
 		const detailDescription = document.getElementById('detail-description');
 
+		let activeSkill = null;
+
+		const renderDetail = (skill, row) => {
+			detailIcon.src = skill.icon;
+			detailTitle.textContent = skill.name;
+			const catSpan = row?.querySelector('td:nth-child(2) [data-i18n]');
+			detailCategory.textContent = catSpan ? catSpan.textContent : skill.category;
+			detailDescription.textContent =
+				(window.t ? window.t('skill.' + skill.id + '.desc') : null) || skill.description;
+			emptyState.style.display = 'none';
+			detailContent.style.display = 'flex';
+		};
+
 		rows.forEach(row => {
 			row.addEventListener('click', () => {
-				// Remove active class from all rows
 				rows.forEach(r => r.classList.remove('active'));
-				// Add active class to clicked row
 				row.classList.add('active');
 
-				// Find the skill data
 				const skillId = row.getAttribute('data-skill-id');
 				const skill = skillsData.find(s => s.id === skillId);
 
 				if (skill) {
-					// Update DOM
-					detailIcon.src = skill.icon;
-					detailTitle.textContent = skill.name;
-					detailCategory.textContent = skill.category;
-					detailDescription.textContent = skill.description;
-
-					// Switch views
-					emptyState.style.display = 'none';
-					detailContent.style.display = 'flex';
+					activeSkill = { skill, row };
+					renderDetail(skill, row);
 				}
 			});
+		});
+
+		document.addEventListener('i18n:change', () => {
+			if (activeSkill) renderDetail(activeSkill.skill, activeSkill.row);
 		});
 	});
 </script>
