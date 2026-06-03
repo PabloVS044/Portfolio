@@ -1,56 +1,217 @@
 ---
 const tabs = [
 	{ id: 'readme', label: 'README.md' },
-	{ id: 'preview', label: 'Preview' },
 	{ id: 'learnings', label: 'Learnings.md' },
 ];
 
+const DI = (path: string) =>
+	`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${path}.svg`;
+
+const ICON_MAP: Record<string, string> = {
+	'React':       DI('react/react-original'),
+	'Node.js':     DI('nodejs/nodejs-original'),
+	'Express':     DI('express/express-original'),
+	'MongoDB':     DI('mongodb/mongodb-original'),
+	'PostgreSQL':  DI('postgresql/postgresql-original'),
+	'Python':      DI('python/python-original'),
+	'FastAPI':     DI('fastapi/fastapi-original'),
+	'Docker':      DI('docker/docker-original'),
+	'Nginx':       DI('nginx/nginx-original'),
+	'TypeScript':  DI('typescript/typescript-original'),
+	'JavaScript':  DI('javascript/javascript-original'),
+	'.NET 10':     DI('dot-net/dot-net-original'),
+	'Blazor':      DI('blazor/blazor-original'),
+	'Supabase':    DI('supabase/supabase-original'),
+	'Knex':        DI('knexjs/knexjs-original'),
+	'Linux':       DI('linux/linux-original'),
+	'Git':         DI('git/git-original'),
+	'Astro':       DI('astro/astro-original'),
+	'Next.js':     DI('nextjs/nextjs-original'),
+};
+
 const projects = [
 	{
-		id: 'waterway',
-		crumb: 'waterway',
-		fileName: 'Waterway+',
-		title: 'WaterWay+',
-		subtitle: 'Plataforma web para monitoreo y protección de ríos',
+		id: 'filestodata',
+		crumb: 'filestodata',
+		fileName: 'FilesToData',
+		title: 'FilesToData',
+		category: 'Empresa · En Producción',
+		subtitle: 'Pipeline enterprise para extracción de datos desde PDFs industriales',
 		description:
-			'Plataforma web colaborativa para la protección de ríos, reportes ciudadanos y eventos ambientales impulsada por datos satelitales y IA.',
+			'Sistema interno que automatiza el ingreso manual de órdenes de producción en Apparel Links. Los PDFs llegan en español, inglés y coreano. Blazor Server + FastAPI + Azure Document Intelligence + LLM local. Todo dockerizado en servidor físico Ubuntu.',
 		year: '2025',
-		role: 'Full Stack Developer',
-		status: 'Primer Lugar',
-		statusTone: 'complete',
-		stack: ['React', 'Node.js', 'Express', 'MongoDB', 'OpenAI', 'Copernicus'],
+		role: 'Full Stack Developer & DevOps',
+		status: 'En Producción',
+		statusTone: 'progress',
+		heroIcons: [
+			DI('docker/docker-original'),
+			DI('dot-net/dot-net-original'),
+			DI('fastapi/fastapi-original'),
+			DI('python/python-original'),
+		],
+		stack: ['Blazor', '.NET 10', 'FastAPI', 'Python', 'Azure Document Intelligence', 'MongoDB', 'Azure SQL', 'Docker', 'Nginx', 'Cloudflare'],
 		links: [
-			{ label: 'Repositorio', href: '#' },
+			{ label: '🔒 Repositorio privado', href: null },
 		],
 		overview:
-			'Proyecto ganador del primer lugar en la Hackatón Copernicus 2025 organizada por SENACYT. Permite el monitoreo ambiental combinando datos satelitales con análisis de inteligencia artificial.',
+			'Apparel Links recibía órdenes de producción en PDF de clientes en Corea, EEUU y Centroamérica. Ingresarlas al ERP a mano tomaba horas. Construí un pipeline que lee el PDF, extrae los campos con Azure Document Intelligence, los mapea al schema del ERP y los envía directo a Azure SQL. El frontend en Blazor Server permite revisar y corregir antes de confirmar.',
 		features: [
 			{
-				title: 'Datos Satelitales',
-				description: 'Integración en tiempo real de datos del programa espacial Copernicus.',
+				title: 'OCR multi-idioma con Azure Document Intelligence',
+				description: 'Extracción de tablas y campos desde PDFs en español, inglés y coreano. El campo mapping por buyer se configura por plantilla — cada cliente tiene su propio formato de work order.',
 			},
 			{
-				title: 'Análisis con IA',
-				description: 'Uso de la API de OpenAI para procesar reportes y analizar eventos ambientales de forma inteligente.',
+				title: 'Orquestación Docker Compose con healthchecks',
+				description: 'Blazor (.NET 10) + FastAPI (Python 3.11) + Nginx en red Docker interna. El nginx no arranca hasta que backend y frontend pasen healthcheck. Sin esto, el reverse proxy apuntaba a contenedores que aún cargaban.',
 			},
 			{
-				title: 'Reportes Ciudadanos',
-				description: 'Módulo colaborativo para que la comunidad registre anomalías y participe en la protección de los ríos.',
+				title: 'LLM local para Q&A de documentos',
+				description: 'Endpoint de preguntas sobre documentos extraídos. Claude API para calidad, Ollama + Qwen3 para queries que no deben salir de la red interna. La decisión de qué modelo usar depende del tipo de datos del documento.',
+			},
+			{
+				title: 'Infra on-premise + Cloudflare Tunnel',
+				description: 'Ubuntu 24.04 en servidor físico de la empresa. Sin puertos abiertos al exterior: Cloudflare Tunnel maneja SSL y exposición. Portainer CE para gestión de contenedores sin necesidad de SSH en producción.',
 			},
 		],
 		previewHighlights: [
-			'Participación integral: desde la planificación y diseño de producto hasta el desarrollo full-stack.',
-			'Arquitectura escalable en el backend usando Node.js, Express y MongoDB.',
-			'Interfaces de mapas interactivos que cruzan datos satelitales con reportes en el terreno.',
+			'Clean Architecture en Python: capas domain / application / infrastructure / presentation. Si cambias el OCR engine por otro proveedor, solo tocas la capa de infrastructure.',
+			'ThreadPoolExecutor + semáforo de concurrencia para llamadas OCR. Sin control de concurrencia, Azure DI throttleaba con múltiples PDFs simultáneos.',
+			'Cleanup periódico de upload jobs expirados con asyncio.create_task — evita memory leaks en el servidor sin bloquear el event loop.',
 		],
 		learnings: [
-			'Cruzar datos geoespaciales con IA requiere una optimización cuidadosa para mantener el rendimiento.',
-			'El diseño de producto en una hackatón debe priorizar la narrativa visual y la facilidad de uso inmediato.',
-			'Las arquitecturas basadas en eventos facilitan la escalabilidad del procesamiento en tiempo real.',
+			'Azure DI es preciso pero el field mapping por buyer es el trabajo real. El modelo OCR es solo 20% del problema; el otro 80% es entender qué campo va a qué columna del ERP.',
+			'Cloudflare Tunnel es la forma más limpia de exponer servicios on-premise: SSL termination en el edge, HTTP limpio internamente, sin VPN ni puertos abiertos.',
+			'En producción real, los healthchecks en Docker Compose no son opcionales. Sin ellos el nginx arranca antes que el backend y los primeros requests fallan.',
+		],
+		metrics: [
+			{ label: 'Infra', value: 'On-premise', meta: 'Ubuntu 24.04' },
+			{ label: 'Containers', value: '4 servicios', meta: 'Docker Compose' },
+			{ label: 'OCR', value: 'Azure DI', meta: '+ Ollama local' },
+		],
+		previewImage: '/projects/filestodata.png',
+		accent: '#f97316',
+		accentSoft: 'rgba(249, 115, 22, 0.18)',
+		glow: 'rgba(249, 115, 22, 0.32)',
+	},
+	{
+		id: 'llm-infra',
+		crumb: 'llm-infra',
+		fileName: 'LLM Infrastructure',
+		title: 'AI Inference Server',
+		category: 'Infraestructura · Apparel Links',
+		subtitle: 'Servidor de inferencia LLM privado con sglang, autenticación y multi-tenant',
+		description:
+			'Despliegue desde cero de un servidor de inferencia privado con Qwen3-27B-FP8 en hardware de alto rendimiento (dual RTX Pro 6000 Blackwell, Xeon W7-3455, 256GB RAM). Lo consumen FilesToData, apps internas web y móvil, y los devs del equipo para coding asistido con OpenCode.',
+		year: '2025',
+		role: 'MLOps / AI Infrastructure Engineer',
+		status: 'En Producción',
+		statusTone: 'progress',
+		heroIcons: [
+			DI('docker/docker-original'),
+			DI('python/python-original'),
+			DI('linux/linux-original'),
+			DI('nginx/nginx-original'),
+		],
+		stack: ['sglang', 'Docker', 'Qwen3-27B-FP8', 'Python', 'Linux', 'NVIDIA CUDA', 'OpenCode'],
+		links: [
+			{ label: '🔒 Infraestructura interna', href: null },
+		],
+		overview:
+			'El equipo necesitaba un LLM privado: los datos de producción no podían salir a APIs externas. Monté sglang sobre una estación con doble RTX Pro 6000 Blackwell y Xeon W7-3455. El modelo Qwen3-27B-FP8 se persiste en volumen Docker para evitar re-descargas. Encima del servidor de inferencia construí un backend con sistema de API keys para que el acceso no fuera abierto dentro de la red.',
+		features: [
+			{
+				title: 'sglang como engine de inferencia',
+				description: 'sglang sobre dual RTX Pro 6000 Blackwell (NVIDIA Blackwell, ~96GB VRAM total). FP8 quantization del Qwen3-27B permite correr el modelo completo con latencias bajas. Interfaz OpenAI-compatible para que las apps existentes apunten al servidor sin cambiar código.',
+			},
+			{
+				title: 'Docker con modelo persistente',
+				description: 'Imagen Docker custom con sglang + backend de autenticación. El modelo se monta desde un volumen persistente en disco — sin esto cada reinicio del contenedor re-descarga 27B de pesos. El compose levanta inference + auth como servicios separados.',
+			},
+			{
+				title: 'Sistema de API keys + backend propio',
+				description: 'Backend Python que actúa como proxy autenticado al servidor sglang. Cada consumidor (FilesToData, apps móvil, devs) tiene su propia key. Sin key válida, el request no llega al modelo. Logs de uso por key para trazabilidad.',
+			},
+			{
+				title: 'Integración con OpenCode para devs',
+				description: 'JSONs de configuración personalizados para OpenCode que apuntan al endpoint interno. Los devs solo importan el perfil y OpenCode usa el Qwen3 interno como backend — sin cuentas externas, sin costo por token, sin datos saliendo de la red.',
+			},
+		],
+		previewHighlights: [
+			'sglang sobre FP8 en dual GPU Blackwell: latencia de primera respuesta ~800ms para prompts de coding típicos. Viable para uso interactivo en tiempo real.',
+			'El backend de auth como proxy separado del inference server — si el auth falla, el modelo sigue corriendo. Separation of concerns en infra también.',
+			'Volumen Docker bind-mounted a SSD NVMe local: acceso al modelo en frío sin esperar re-descarga. El contenedor arranca en segundos, no en horas.',
+		],
+		learnings: [
+			'sglang necesita configuración específica por GPU para aprovechar tensor parallelism en multi-GPU. Sin ese tuning, usaba una sola GPU aunque hubiera dos.',
+			'FP8 vs FP16 en Qwen3-27B: calidad casi idéntica en tareas de coding y análisis de documentos, con ~40% menos uso de VRAM. La precisión reducida no se nota en la práctica.',
+			'Un proxy de autenticación propio da control total sobre quién usa el modelo y cuánto. Esencial cuando el hardware es compartido y los recursos son limitados.',
+		],
+		metrics: [
+			{ label: 'Modelo', value: 'Qwen3-27B', meta: 'FP8 quant' },
+			{ label: 'GPU', value: '2× RTX Pro', meta: '6000 Blackwell' },
+			{ label: 'RAM', value: '256 GB', meta: 'Xeon W7-3455' },
+		],
+		accent: '#22d3ee',
+		accentSoft: 'rgba(34, 211, 238, 0.15)',
+		glow: 'rgba(34, 211, 238, 0.28)',
+	},
+	{
+		id: 'waterway',
+		crumb: 'waterway',
+		fileName: 'WaterWay+',
+		title: 'WaterWay+',
+		category: 'Hackathon · 1er Lugar SENACYT',
+		subtitle: 'Plataforma de monitoreo ambiental del Río Motagua con datos satelitales e IA',
+		description:
+			'Ganamos el primer lugar del Hackathon Copernicus 2025 organizado por SENACYT. En 48 horas construimos una plataforma completa para monitoreo del Río Motagua: mapa interactivo con React Leaflet, reportes ciudadanos geolocalizados, análisis con OpenAI, dashboard de métricas y coordinación de eventos de limpieza.',
+		year: '2025',
+		role: 'Full Stack Developer',
+		status: '1er Lugar SENACYT',
+		statusTone: 'complete',
+		heroIcons: [
+			DI('react/react-original'),
+			DI('nodejs/nodejs-original'),
+			DI('mongodb/mongodb-original'),
+			DI('tailwindcss/tailwindcss-original'),
+		],
+		stack: ['React', 'TypeScript', 'Vite', 'React Leaflet', 'Tailwind CSS', 'Radix UI', 'Zod', 'React Hook Form', 'Node.js', 'MongoDB', 'OpenAI', 'Copernicus API'],
+		links: [
+			{ label: 'Repositorio', href: 'https://github.com/kinalitos/waterway-frontend' },
+		],
+		overview:
+			'La Hackatón pedía usar datos de Copernicus sobre el medioambiente. La mayoría de equipos mostró mapas estáticos. Nosotros construimos una SPA completa: autenticación, reportes ciudadanos con geolocalización directa en el mapa, feed de publicaciones, coordinador de eventos de voluntariado, dashboard con métricas y un módulo de IA para análisis de contaminación del Motagua.',
+		features: [
+			{
+				title: 'Mapa interactivo con React Leaflet',
+				description: 'El usuario hace click directamente en el mapa para registrar un punto de contaminación. React Leaflet con capas de OpenStreetMap, marcadores dinámicos por tipo de incidente y clustering para zonas de alta densidad de reportes.',
+			},
+			{
+				title: 'Sistema de reportes ciudadanos',
+				description: 'CRUD completo de reportes de contaminación: formulario geolocalizdo con React Hook Form + Zod para validación, Axios para comunicación con el backend, y Sonner para feedback inmediato sin interrumpir el flujo del usuario.',
+			},
+			{
+				title: 'Módulo de IA para análisis del Motagua',
+				description: 'Página dedicada (`MapaIA.jsx`) que cruza los reportes ciudadanos con datos satelitales de Copernicus y análisis de OpenAI para identificar patrones de contaminación y generar alertas automáticas.',
+			},
+			{
+				title: 'Dashboard de impacto ambiental',
+				description: 'Métricas de incidentes reportados, tasa de resolución y participación comunitaria visualizadas con react-chartjs-2. Sistema de roles y autenticación con AuthProvider propio en TypeScript.',
+			},
+		],
+		previewHighlights: [
+			'shadcn/ui sobre Radix UI + Tailwind — sistema de componentes tipados que permitió construir 15+ páginas en 48 horas sin inconsistencias visuales.',
+			'React Hook Form + Zod para el formulario de reportes: validación en el cliente antes de cada request al backend, sin calls innecesarios a la API.',
+			'Servicios separados por dominio (`contamination-reports-api.js`, `events-api.js`, `users-api.ts`) — cada página importa solo lo que necesita, sin un god service.',
+		],
+		learnings: [
+			'shadcn/ui es una decisión que se amortiza muy rápido en hackathones: los componentes son tuyos, no una dependencia, y Tailwind los hace adaptables al diseño en minutos.',
+			'La separación de servicios por dominio (reportes, eventos, usuarios) evitó que el código se convirtiera en un caos cuando tres personas tocaban el mismo archivo a la vez.',
+			'React Leaflet necesita workarounds para SSR y para importar los íconos correctamente con Vite. Lo aprendimos a las 2am del hackathon cuando el mapa dejó de mostrar los marcadores.',
 		],
 		metrics: [
 			{ label: 'Premio', value: '1er Lugar', meta: 'SENACYT 2025' },
-			{ label: 'Datos', value: 'Copernicus', meta: 'Satelital' },
+			{ label: 'Río', value: 'Motagua', meta: 'Guatemala' },
+			{ label: 'Satélite', value: 'Sentinel-2', meta: 'Copernicus ESA' },
 		],
 		accent: '#5b7cff',
 		accentSoft: 'rgba(91, 124, 255, 0.2)',
@@ -61,46 +222,52 @@ const projects = [
 		crumb: 'chemiq',
 		fileName: 'ChemiQ',
 		title: 'ChemiQ',
+		category: 'Producción · UVG',
 		subtitle: 'Portal web para la Asociación de Química UVG',
 		description:
-			'Plataforma integral que centraliza noticias, pódcast, recursos académicos y contenido para estudiantes de química.',
+			'Portal en producción real para la Asociación de Química de la Universidad del Valle. Mi rol fue diseñar el backend y la base de datos pensando en que quien lo va a mantener son estudiantes de química, no desarrolladores de software.',
 		year: '2024 - 2025',
 		role: 'Backend & Database Engineer',
 		status: 'En Producción',
 		statusTone: 'progress',
+		heroIcons: [
+			DI('postgresql/postgresql-original'),
+			DI('nodejs/nodejs-original'),
+			DI('supabase/supabase-original'),
+		],
 		stack: ['React', 'Node.js', 'PostgreSQL', 'Express', 'Supabase', 'Knex'],
 		links: [
-			{ label: 'Visitar Portal', href: '#' },
+			{ label: '🔒 Repositorio privado', href: null },
 		],
 		overview:
-			'Un portal web diseñado para fortalecer la comunicación y presencia digital de la asociación. Proveé una base mantenible para la gestión de contenido académico y multimedia.',
+			'El requerimiento real no era "hacer un portal bonito" sino hacer algo que los próximos estudiantes que tomen el proyecto puedan mantener sin pedirle ayuda a nadie. Diseñé el schema con migrations versionadas, la API con separación de capas explícita, y documenté cada decisión técnica en el código.',
 		features: [
 			{
-				title: 'Gestión de Contenido',
-				description: 'Sistema centralizado para publicación de noticias, pódcast y material académico.',
+				title: 'Schema pensado para continuidad',
+				description: 'Migrations versionadas con Knex para que cualquier cambio de schema sea reversible y auditable. Supabase como host pero sin vendor lock-in: las queries son SQL puro, no llaman a funciones propietarias de Supabase.',
 			},
 			{
-				title: 'Base de Datos Relacional',
-				description: 'Estructura sólida en PostgreSQL gestionada mediante Supabase y Knex.js.',
+				title: 'API REST con capas explícitas',
+				description: 'Controllers → Services → Repository. Si alguien necesita migrar de Supabase a RDS en el futuro, solo toca la capa de repositorio. Eso era el requerimiento real del cliente.',
 			},
 			{
-				title: 'API Escalable',
-				description: 'Servicios backend desarrollados en Express y Node.js para alimentar la plataforma en tiempo real.',
+				title: 'Streaming de pódcast integrado',
+				description: 'Los episodios viven en UploadThing CDN. El backend gestiona metadatos y URLs, no binarios. Aprendido de una experiencia anterior donde guardar archivos en la DB era un desastre de performance.',
 			},
 		],
 		previewHighlights: [
-			'Arquitectura backend orientada a la mantenibilidad a largo plazo por futuros estudiantes.',
-			'Manejo robusto de migraciones de bases de datos y consultas relacionales complejas.',
-			'Integración fluida de multimedia y streaming de pódcast.',
+			'Para proyectos comunitarios, el código que se puede leer sin documentación vale más que el código inteligente. Simplifiqué varias abstracciones que podían ser más elegantes.',
+			'Knex migrations hacen que los cambios de schema sean reversibles en producción. Sin ellas, cualquier error de BD requiere acceso directo al servidor.',
+			'Separar la capa de acceso a datos desde el día uno paga doble cuando llega el siguiente dev al proyecto seis meses después.',
 		],
 		learnings: [
-			'Supabase combinado con Knex permite iteraciones de base de datos extremadamente rápidas sin perder el control del esquema.',
-			'Para proyectos comunitarios/estudiantiles, la facilidad de mantenimiento es la característica más importante.',
-			'Separar estrictamente la capa de acceso a datos facilita el testing y la seguridad de los endpoints.',
+			'Supabase + Knex es una combinación sorprendentemente efectiva: la velocidad de setup de Supabase con el control total de schema que da Knex migrations.',
+			'Para proyectos de larga vida, la mantenibilidad es el feature más importante. Un nuevo dev que entiende el código en 20 minutos es más valioso que una arquitectura perfecta.',
+			'Documentar las decisiones de diseño directamente en el código (no en un wiki externo) es lo único que sobrevive el paso del tiempo en proyectos estudiantiles.',
 		],
 		metrics: [
-			{ label: 'Base de Datos', value: 'PostgreSQL', meta: 'Supabase' },
-			{ label: 'Usuarios', value: 'UVG', meta: 'Estudiantes' },
+			{ label: 'DB', value: 'PostgreSQL', meta: 'via Supabase' },
+			{ label: 'Usuarios', value: 'UVG', meta: 'Asociación Química' },
 		],
 		accent: '#4ee3c8',
 		accentSoft: 'rgba(78, 227, 200, 0.18)',
@@ -111,46 +278,52 @@ const projects = [
 		crumb: 'seasos',
 		fileName: 'SeaSOS',
 		title: 'SeaSOS',
-		subtitle: 'Plataforma educativa sobre ecosistemas marinos',
+		category: 'Académico · UVG',
+		subtitle: 'Landing interactiva sobre ecosistemas marinos con mapa de fauna y heatmap',
 		description:
-			'Aplicación web que utiliza IA y visualización de datos para generar conciencia sobre el impacto humano en los océanos.',
+			'Proyecto universitario: landing page educativa sobre ecosistemas marinos construida con React + Vite, desplegada en Firebase Hosting. Mapa interactivo con React Leaflet para ubicar fauna marina, heatmap de zonas críticas y visualizaciones con Google Charts.',
 		year: '2024',
-		role: 'Full Stack Developer',
+		role: 'Frontend Developer',
 		status: 'Completado',
 		statusTone: 'complete',
-		stack: ['React', 'Node.js', 'MongoDB', 'Express', 'OpenAI'],
+		heroIcons: [
+			DI('react/react-original'),
+			DI('tailwindcss/tailwindcss-original'),
+			DI('firebase/firebase-original'),
+		],
+		stack: ['React', 'Vite', 'Tailwind CSS', 'React Leaflet', 'React Google Charts', 'React Bootstrap', 'Firebase Hosting'],
 		links: [
-			{ label: 'Repositorio', href: '#' },
+			{ label: 'Repositorio', href: 'https://github.com/PabloVS044/LandingSeaSOS' },
 		],
 		overview:
-			'Una herramienta educativa de alto impacto que combina el consumo de APIs de IA generativa con gráficos interactivos para explicar fenómenos complejos del ecosistema marino.',
+			'Landing educativa sobre el impacto humano en ecosistemas marinos. El enfoque fue hacer los datos fáciles de leer para cualquier usuario: un mapa con marcadores de animales marinos por región, un heatmap de zonas de alto impacto y gráficos de tendencias con Google Charts. Desplegada en Firebase Hosting.',
 		features: [
 			{
-				title: 'Generación con IA',
-				description: 'Integración de la API de OpenAI para crear contenido educativo dinámico y personalizado según las interacciones del usuario.',
+				title: 'Mapa interactivo con fauna marina',
+				description: 'React Leaflet con marcadores custom por especie (`Animal.jsx`, `Marker.jsx`). Cada marcador muestra información de la especie y su estado de conservación al hacer click.',
 			},
 			{
-				title: 'Visualización de Datos',
-				description: 'Gráficos e infografías interactivas para comunicar el impacto humano a lo largo del tiempo.',
+				title: 'Heatmap de zonas críticas',
+				description: 'Componente HeatMap propio sobre el mapa base para visualizar concentración de amenazas por región geográfica usando datos mockeados en `regions.js`.',
 			},
 			{
-				title: 'Módulo de Conciencia',
-				description: 'Recorridos interactivos para aumentar la retención del conocimiento en los usuarios.',
+				title: 'Visualizaciones con Google Charts',
+				description: 'Gráficos de tendencias de impacto ambiental con react-google-charts. Tailwind CSS + MDB React UI Kit para el sistema de diseño consistente en toda la landing.',
 			},
 		],
 		previewHighlights: [
-			'Consumo asíncrono y estructurado de la API de OpenAI para garantizar respuestas rápidas y seguras.',
-			'UI reactiva y amigable orientada a la exploración y el aprendizaje autodidacta.',
-			'Backend en Express optimizado para la entrega de datos estadísticos hacia el cliente.',
+			'React Leaflet con marcadores custom tipados por especie — cada tipo de animal tiene su propio ícono y popup con datos de conservación.',
+			'Deploy en Firebase Hosting con configuración de SPA redirects en `firebase.json` para que React Router funcione en producción.',
+			'Tailwind + React Bootstrap + MDB juntos — aprendí a no mezclar tantos sistemas de estilos en el mismo proyecto.',
 		],
 		learnings: [
-			'Hacer que los datos crudos sean emocionalmente resonantes requiere interactividad, no solo gráficas planas.',
-			'El prompting estructurado es vital para que las respuestas del LLM encajen en componentes de UI predecibles.',
-			'Los tiempos de carga en plataformas educativas determinan fuertemente el engagement del usuario.',
+			'Mezclar Tailwind con React Bootstrap y MDB crea conflictos de especificidad CSS constantes. En proyectos futuros elijo uno y lo uso consistentemente.',
+			'Firebase Hosting es la forma más rápida de desplegar una SPA de React: un `firebase deploy` y está en CDN global.',
+			'Los datos mockeados en `regions.js` sirvieron para el MVP, pero queda claro que sin una API real el proyecto no escala más allá de la demo.',
 		],
 		metrics: [
-			{ label: 'IA Engine', value: 'OpenAI', meta: 'GPT-4' },
-			{ label: 'Propósito', value: 'Educativo', meta: 'Conciencia' },
+			{ label: 'Deploy', value: 'Firebase', meta: 'Hosting CDN' },
+			{ label: 'Mapa', value: 'Leaflet', meta: 'React Leaflet' },
 		],
 		accent: '#a66bff',
 		accentSoft: 'rgba(166, 107, 255, 0.18)',
@@ -167,7 +340,7 @@ const projects = [
 	hidden
 >
 	<div class="code-window" role="dialog" aria-labelledby="code-window-title" aria-modal="false">
-		<h2 id="code-window-title" class="desktop-sr-only">VS Code projects showcase</h2>
+		<h2 id="code-window-title" class="desktop-sr-only">VS Code — Proyectos</h2>
 
 		<header class="code-window__header" data-code-drag-handle>
 			<div class="code-window__framebar">
@@ -179,20 +352,16 @@ const projects = [
 
 				<div class="code-window__breadcrumbs">
 					<span class="code-window__crumb-icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24">
-							<path d="M4.8 10.2 12 4.8l7.2 5.4v8.6H14v-4.6h-4v4.6H4.8z"></path>
-						</svg>
+						<svg viewBox="0 0 24 24"><path d="M4.8 10.2 12 4.8l7.2 5.4v8.6H14v-4.6h-4v4.6H4.8z"></path></svg>
 					</span>
 					<span class="code-window__crumb">Projects</span>
 					<span class="code-window__crumb-separator" aria-hidden="true">
-						<svg viewBox="0 0 24 24">
-							<path d="m9 6.5 6 5.5-6 5.5"></path>
-						</svg>
+						<svg viewBox="0 0 24 24"><path d="m9 6.5 6 5.5-6 5.5"></path></svg>
 					</span>
 					<span class="code-window__crumb code-window__crumb--current" data-code-current-project-label>{projects[0].crumb}</span>
 				</div>
 
-				<div class="code-window__tabs" aria-label="Project sections">
+				<div class="code-window__tabs" aria-label="Secciones del proyecto">
 					{tabs.map((tab, index) => (
 						<button
 							type="button"
@@ -203,16 +372,15 @@ const projects = [
 							{tab.label}
 						</button>
 					))}
-					<button type="button" class="code-window__tab-action" aria-label="New tab">
-						+
-					</button>
+					<button type="button" class="code-window__tab-action" aria-label="Nueva pestaña">+</button>
 				</div>
 			</div>
 		</header>
 
 		<div class="code-window__shell">
-			<aside class="code-window__explorer" aria-label="Projects list">
-				<div class="code-window__explorer-heading">FILES</div>
+			<!-- Sidebar: lista de proyectos -->
+			<aside class="code-window__explorer" aria-label="Lista de proyectos">
+				<div class="code-window__explorer-heading">PROYECTOS</div>
 				<nav class="code-window__project-list">
 					{projects.map((project, index) => (
 						<button
@@ -223,10 +391,10 @@ const projects = [
 							aria-selected={index === 0 ? 'true' : 'false'}
 						>
 							<span class="code-window__project-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24">
-									<rect x="3.8" y="4.2" width="16.4" height="15.6" rx="2.6"></rect>
-									<path d="M8 9.2h3.2M8 14.4h8M14.2 9.2H16"></path>
-								</svg>
+								{project.heroIcons[0]
+									? <img src={project.heroIcons[0]} alt="" width="18" height="18" />
+									: <svg viewBox="0 0 24 24"><rect x="3.8" y="4.2" width="16.4" height="15.6" rx="2.6"></rect><path d="M8 9.2h3.2M8 14.4h8M14.2 9.2H16"></path></svg>
+								}
 							</span>
 							<span class="code-window__project-name">{project.fileName}</span>
 						</button>
@@ -234,9 +402,11 @@ const projects = [
 				</nav>
 			</aside>
 
-			<section class="code-window__main" aria-label="Project showcase">
+			<!-- Contenido principal -->
+			<section class="code-window__main" aria-label="Detalle del proyecto">
 				{projects.map((project, projectIndex) => (
 					<>
+						<!-- Tab: README -->
 						<article
 							class="code-window__panel"
 							data-code-project-panel={project.id}
@@ -245,59 +415,50 @@ const projects = [
 							hidden={projectIndex !== 0}
 						>
 							<div class="code-window__hero">
+								<!-- Hero mark con iconos reales del stack -->
 								<div class="code-window__hero-mark">
-									<div class="code-window__hero-mark-inner"></div>
+									{project.heroIcons.slice(0, 4).map((icon) => (
+										<img src={icon} alt="" class="code-window__hero-icon" loading="lazy" />
+									))}
 								</div>
+
 								<div class="code-window__hero-copy">
-									<p class="code-window__eyebrow">{project.fileName}</p>
+									<div class="code-window__hero-meta">
+										<p class="code-window__eyebrow">{project.fileName}</p>
+										<span class="code-window__category-badge">{project.category}</span>
+									</div>
 									<h3>{project.title}</h3>
 									<p class="code-window__subtitle">{project.subtitle}</p>
 									<p class="code-window__description">{project.description}</p>
 
 									<div class="code-window__actions">
 										{project.links.map((link, linkIndex) => (
-											<a href={link.href} class={`code-window__action ${linkIndex === 0 ? 'code-window__action--primary' : ''}`}>
-												{link.label}
-											</a>
+											link.href && link.href !== '#'
+												? <a href={link.href} target="_blank" rel="noopener noreferrer" class={`code-window__action ${linkIndex === 0 ? 'code-window__action--primary' : ''}`}>{link.label}</a>
+												: <span class={`code-window__action code-window__action--locked`}>{link.label}</span>
 										))}
 									</div>
 								</div>
 							</div>
 
-							<div class="code-window__preview-frame">
-								<div class="code-window__preview-sidebar">
-									<span class="code-window__preview-badge"></span>
-									<span class="code-window__preview-line code-window__preview-line--active"></span>
-									<span class="code-window__preview-line"></span>
-									<span class="code-window__preview-line"></span>
-									<span class="code-window__preview-line"></span>
-								</div>
-								<div class="code-window__preview-canvas">
-									<div class="code-window__preview-search"></div>
-									<div class="code-window__preview-map">
-										<span class="code-window__preview-node code-window__preview-node--a"></span>
-										<span class="code-window__preview-node code-window__preview-node--b"></span>
-										<span class="code-window__preview-node code-window__preview-node--c"></span>
-										<span class="code-window__preview-node code-window__preview-node--d"></span>
-										<span class="code-window__preview-node code-window__preview-node--e"></span>
+							<!-- Métricas -->
+							<div class="code-window__metrics-row">
+								{project.metrics.map((metric) => (
+									<div class="code-window__metric-card">
+										<span class="code-window__metric-label">{metric.label}</span>
+										<strong>{metric.value}</strong>
+										<span class="code-window__metric-meta">{metric.meta}</span>
 									</div>
-								</div>
-								<div class="code-window__preview-metrics">
-									{project.metrics.map((metric) => (
-										<div class="code-window__metric-card">
-											<span class="code-window__metric-label">{metric.label}</span>
-											<strong>{metric.value}</strong>
-											<span class="code-window__metric-meta">{metric.meta}</span>
-										</div>
-									))}
-								</div>
+								))}
 							</div>
 
+							<!-- Overview -->
 							<div class="code-window__content-block">
-								<h4>Overview</h4>
+								<h4>Contexto</h4>
 								<p>{project.overview}</p>
 							</div>
 
+							<!-- Features -->
 							<div class="code-window__feature-grid">
 								{project.features.map((feature) => (
 									<div class="code-window__feature-card">
@@ -308,50 +469,7 @@ const projects = [
 							</div>
 						</article>
 
-						<article
-							class="code-window__panel"
-							data-code-project-panel={project.id}
-							data-code-tab-panel="preview"
-							style={`--code-accent: ${project.accent}; --code-accent-soft: ${project.accentSoft}; --code-glow: ${project.glow};`}
-							hidden
-						>
-							<div class="code-window__section-header">
-								<p class="code-window__eyebrow">Preview</p>
-								<h3>{project.title} Workspace Preview</h3>
-								<p class="code-window__description">
-									A project-level summary of the interface direction, system behavior and the user flow this
-									showcase emphasizes.
-								</p>
-							</div>
-
-							<div class="code-window__preview-layout">
-								<div class="code-window__preview-board">
-									<div class="code-window__preview-board-top">
-										<span></span>
-										<span></span>
-										<span></span>
-									</div>
-									<div class="code-window__preview-board-main">
-										<div class="code-window__preview-board-column"></div>
-										<div class="code-window__preview-board-canvas"></div>
-										<div class="code-window__preview-board-stack">
-											<span></span>
-											<span></span>
-											<span></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="code-window__note-list">
-									{project.previewHighlights.map((item) => (
-										<div class="code-window__note-card">
-											<p>{item}</p>
-										</div>
-									))}
-								</div>
-							</div>
-						</article>
-
+						<!-- Tab: Learnings -->
 						<article
 							class="code-window__panel"
 							data-code-project-panel={project.id}
@@ -360,11 +478,10 @@ const projects = [
 							hidden
 						>
 							<div class="code-window__section-header">
-								<p class="code-window__eyebrow">Learnings</p>
-								<h3>What this project taught me</h3>
+								<p class="code-window__eyebrow">Learnings.md</p>
+								<h3>Lo que este proyecto me enseñó</h3>
 								<p class="code-window__description">
-									The most useful takeaways from building {project.title}, focused on product decisions,
-									interface design and engineering tradeoffs.
+									Las decisiones técnicas que haría diferente, lo que funcionó mejor de lo esperado, y lo que no aparece en los tutoriales.
 								</p>
 							</div>
 
@@ -381,7 +498,8 @@ const projects = [
 				))}
 			</section>
 
-			<aside class="code-window__details" aria-label="Project details">
+			<!-- Panel derecho: detalles -->
+			<aside class="code-window__details" aria-label="Detalles del proyecto">
 				{projects.map((project, index) => (
 					<div
 						class="code-window__details-panel"
@@ -389,30 +507,37 @@ const projects = [
 						style={`--code-accent: ${project.accent};`}
 						hidden={index !== 0}
 					>
-						<h4>DETAILS</h4>
+						<h4>DETALLES</h4>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Year</span>
+							<span class="code-window__detail-label">Año</span>
 							<strong>{project.year}</strong>
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Role</span>
+							<span class="code-window__detail-label">Rol</span>
 							<strong>{project.role}</strong>
 						</div>
 
 						<div class="code-window__detail-group">
-							<span class="code-window__detail-label">Status</span>
+							<span class="code-window__detail-label">Estado</span>
 							<strong class={`code-window__status code-window__status--${project.statusTone}`}>
-								<i></i>
-								{project.status}
+								<i></i>{project.status}
 							</strong>
 						</div>
 
 						<div class="code-window__detail-group">
 							<span class="code-window__detail-label">Stack</span>
 							<ul class="code-window__stack-list">
-								{project.stack.map((item) => <li>{item}</li>)}
+								{project.stack.map((item) => {
+									const icon = ICON_MAP[item];
+									return (
+										<li class="code-window__stack-item">
+											{icon && <img src={icon} alt="" width="14" height="14" loading="lazy" />}
+											{item}
+										</li>
+									);
+								})}
 							</ul>
 						</div>
 
@@ -420,14 +545,16 @@ const projects = [
 							<span class="code-window__detail-label">Links</span>
 							<div class="code-window__link-list">
 								{project.links.map((link) => (
-									<a href={link.href} class="code-window__detail-link">
-										{link.label}
-										<svg viewBox="0 0 24 24" aria-hidden="true">
-											<path d="M14 5h5v5"></path>
-											<path d="M10 14 19 5"></path>
-											<path d="M19 13v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"></path>
-										</svg>
-									</a>
+									link.href && link.href !== '#'
+										? <a href={link.href} target="_blank" rel="noopener noreferrer" class="code-window__detail-link">
+											{link.label}
+											<svg viewBox="0 0 24 24" aria-hidden="true">
+												<path d="M14 5h5v5"></path>
+												<path d="M10 14 19 5"></path>
+												<path d="M19 13v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"></path>
+											</svg>
+										</a>
+										: <span class="code-window__detail-link code-window__detail-link--disabled">{link.label}</span>
 								))}
 							</div>
 						</div>

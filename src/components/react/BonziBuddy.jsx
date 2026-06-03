@@ -14,7 +14,7 @@ Información sobre Pablo Vásquez:
 - Educación: Ingeniería en Ciencias de la Computación, Universidad del Valle de Guatemala (2024–2028). Becario de mérito (Fundación Juan Bautista Gutiérrez). Primer lugar Hackatón Copernicus 2025 (SENACYT) con WaterWay+.
 - Kinal – Perito en Computación (2021–2023).
 - Skills: React, JavaScript, TypeScript, Node.js, Python, Docker, Astro, Next.js, C#, .NET, PostgreSQL, MySQL, MongoDB, Supabase, AWS, Git, Linux, Figma.
-- Proyectos: WaterWay+ (monitoreo ambiental de ríos con datos satelitales Copernicus + IA, 1er lugar SENACYT 2025), ChemiQ (portal web para Asociación de Química UVG, en producción).
+- Proyectos: WaterWay+ (plataforma de monitoreo del Río Motagua, React+Leaflet+OpenAI+Copernicus, 1er lugar Hackathon SENACYT 2025, repo: github.com/kinalitos/waterway-frontend), ChemiQ (portal web para Asociación de Química UVG, en producción), FilesToData (sistema enterprise de extracción de datos desde PDFs industriales, Blazor+FastAPI+Docker+Azure DI, en producción en Apparel Links).
 - GitHub: github.com/PabloVS044 | Email: pvasquezs044@gmail.com`;
 
 const ACTION_MAP = {
