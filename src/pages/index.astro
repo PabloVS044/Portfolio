@@ -1,5 +1,5 @@
 ---
-import DarkVeil from '../components/DarkVeil.astro';
+import WallpaperManager from '../components/react/WallpaperManager.jsx';
 import DesktopChrome from '../components/desktop/DesktopChrome.astro';
 ---
 
@@ -14,16 +14,7 @@ import DesktopChrome from '../components/desktop/DesktopChrome.astro';
 	</head>
 	<body>
 		<div class="terminal-background" aria-hidden="true">
-			<DarkVeil
-				hueShift={45}
-				noiseIntensity={0}
-				scanlineIntensity={0}
-				speed={1.8}
-				scanlineFrequency={50}
-				warpAmount={1}
-				resolutionScale={1.25}
-				aria-hidden="true"
-			/>
+			<WallpaperManager client:load />
 		</div>
 
 		<DesktopChrome />
