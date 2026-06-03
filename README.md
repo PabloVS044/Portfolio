@@ -2,7 +2,7 @@
 
 Portfolio personal construido como un **desktop de Linux tuneado al estilo macOS** — ventanas arrastrables, redimensionables, wallpapers intercambiables y un asistente de IA integrado. Diseñado para que se sienta como un producto, no como una tarea.
 
-**[→ Ver en vivo](#)** · **[GitHub](https://github.com/PabloVS044)**
+**[→ Ver en vivo](https://pvasquez.dev)** · **[GitHub](https://github.com/PabloVS044)**
 
 ---
 
