@@ -747,7 +747,7 @@ const initTerminalLogic = () => {
 				`);
 				break;
 			case 'whoami':
-				printLine(`Hola, soy <span class="highlight">Pablo Vásquez</span>. Soy un desarrollador apasionado por crear interfaces dinámicas y experiencias inmersivas. Me encanta fusionar diseño y código.`);
+				printLine(`Soy <span class="highlight">Pablo Vásquez</span>, desarrollador Full Stack & DevOps en Guatemala. Trabajo en Apparel Links S.A. construyendo sistemas internos, pipelines de IA y servidores LLM on-premise. Estudio Ingeniería en Ciencias de la Computación en la UVG.`);
 				break;
 			case 'age': {
 				const birth = new Date(2004, 7, 20);
@@ -759,9 +759,11 @@ const initTerminalLogic = () => {
 			}
 			case 'skills':
 				printLine(`
-					<span class="highlight">Frontend:</span> HTML, CSS, JavaScript, Astro, React, Vue<br>
-					<span class="highlight">Backend:</span> Node.js, Python, Bases de Datos<br>
-					<span class="highlight">Herramientas:</span> Git, Terminal, Diseño UI/UX
+					<span class="highlight">Frontend:</span> React, TypeScript, Astro, Next.js, Tailwind CSS<br>
+					<span class="highlight">Backend:</span> Node.js, Python, FastAPI, .NET / C#, Express<br>
+					<span class="highlight">Bases de datos:</span> PostgreSQL, MongoDB, MySQL, Supabase<br>
+					<span class="highlight">DevOps / Infra:</span> Docker, Linux, Nginx, CI/CD, sglang<br>
+					<span class="highlight">Cloud / Tools:</span> AWS, Azure, Git, Figma
 				`);
 				break;
 			case 'experience':
