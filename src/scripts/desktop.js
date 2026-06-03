@@ -749,9 +749,14 @@ const initTerminalLogic = () => {
 			case 'whoami':
 				printLine(`Hola, soy <span class="highlight">Pablo Vásquez</span>. Soy un desarrollador apasionado por crear interfaces dinámicas y experiencias inmersivas. Me encanta fusionar diseño y código.`);
 				break;
-			case 'age':
-				printLine(`Tengo <span class="highlight">X años</span>. (Modifica esto en src/scripts/desktop.js)`);
+			case 'age': {
+				const birth = new Date(2004, 7, 20);
+				const now = new Date();
+				let age = now.getFullYear() - birth.getFullYear();
+				if (now < new Date(now.getFullYear(), 7, 20)) age--;
+				printLine(`Tengo <span class="highlight">${age} años</span>. Nacido el 20 de agosto de 2004.`);
 				break;
+			}
 			case 'skills':
 				printLine(`
 					<span class="highlight">Frontend:</span> HTML, CSS, JavaScript, Astro, React, Vue<br>
